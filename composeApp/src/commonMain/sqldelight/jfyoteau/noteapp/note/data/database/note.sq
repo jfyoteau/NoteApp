@@ -1,0 +1,22 @@
+getAllNotes:
+SELECT *
+FROM note;
+
+getNoteById:
+SELECT *
+FROM note
+WHERE id = ?;
+
+insertNote:
+INSERT OR REPLACE
+INTO note(
+    id,
+    title,
+    content,
+    color,
+    created_at
+) VALUES(?, ?, ?, ?, ?);
+
+deleteNoteById:
+DELETE FROM note
+WHERE id = ?;
