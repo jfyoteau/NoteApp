@@ -40,6 +40,7 @@ kotlin {
             implementation(libs.decompose)
         }
         commonMain.dependencies {
+            implementation(projects.core.ui)
             implementation(projects.feature.note)
             implementation(compose.runtime)
             implementation(compose.foundation)

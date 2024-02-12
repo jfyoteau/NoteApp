@@ -1,8 +1,8 @@
-package jfyoteau.noteapp.note.core
+package jfyoteau.appnote.core.ui
 
 import javax.swing.SwingUtilities
 
-internal fun <T> runOnUiThread(block: () -> T): T {
+fun <T> runOnUiThread(block: () -> T): T {
     if (SwingUtilities.isEventDispatchThread()) {
         return block()
     }
