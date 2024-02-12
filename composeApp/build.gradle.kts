@@ -44,6 +44,7 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(projects.core.databaseSqldelight)
+            implementation(projects.core.decompose)
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -58,7 +59,6 @@ kotlin {
             implementation(libs.decompose)
             implementation(libs.decompose.extensions.compose)
             implementation(libs.kotlinx.serialization.json)
-            implementation(libs.essenty.lifecycle)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
