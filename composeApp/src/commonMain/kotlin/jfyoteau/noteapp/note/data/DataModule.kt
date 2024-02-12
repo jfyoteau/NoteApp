@@ -1,6 +1,6 @@
 package jfyoteau.noteapp.note.data
 
-import jfyoteau.noteapp.core.database.adapter.localDateTimeAdapter
+import jfyoteau.noteapp.core.database.sqldelight.adapter.localDateTimeAdapter
 import jfyoteau.noteapp.note.data.database.Note
 import jfyoteau.noteapp.note.data.database.NoteDatabase
 import jfyoteau.noteapp.note.data.database.NoteQueries

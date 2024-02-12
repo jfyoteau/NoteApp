@@ -43,6 +43,7 @@ kotlin {
             implementation(libs.decompose)
         }
         commonMain.dependencies {
+            implementation(projects.core.databaseSqldelight)
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
