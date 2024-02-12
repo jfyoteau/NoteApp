@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 include(":composeApp")
 include(":core:database-sqldelight")
 include(":core:decompose")
+include(":core:ui")

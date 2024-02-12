@@ -25,7 +25,7 @@ import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import jfyoteau.noteapp.core.ui.ColorUtils
+import jfyoteau.appnote.core.ui.ColorUtils
 import jfyoteau.noteapp.note.domain.model.Note
 
 @Composable

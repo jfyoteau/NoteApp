@@ -1,4 +1,4 @@
-package jfyoteau.noteapp.core.ui
+package jfyoteau.appnote.core.ui
 
 object ColorUtils {
     fun blendARGB(
