@@ -1,10 +1,8 @@
 [versions]
 agp = "8.2.2"
-android-compileSdk = "34"
-android-minSdk = "24"
-android-targetSdk = "34"
+android-desugarJdkLibs = "2.0.4"
 androidx-activityCompose = "1.8.2"
-androidx-compose = "1.6.1"
+androidx-compose-bom = "2024.02.00"
 androidx-compose-compiler = "1.5.9"
 decompose = "2.2.2-compose-experimental"
 jetbrains-compose-compiler = "1.5.8"
@@ -17,9 +15,11 @@ kotlinx-serialization = "1.6.2"
 sqldelight = "2.0.1"
 
 [libraries]
+android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "android-desugarJdkLibs" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activityCompose" }
-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "androidx-compose" }
-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "androidx-compose" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidx-compose-bom" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
 decompose-extensions-compose = { group = "com.arkivanov.decompose", name = "extensions-compose-jetbrains", version.ref = "decompose" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
@@ -35,6 +35,11 @@ sqldelight-driver-native = { group = "app.cash.sqldelight", name = "native-drive
 sqldelight-driver-sqlite = { group = "app.cash.sqldelight", name = "sqlite-driver", version.ref = "sqldelight" }
 sqldelight-runtime = { group = "app.cash.sqldelight", name = "runtime", version.ref = "sqldelight" }
 
+# Dependencies of the included build-logic
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+jetbrains-compose-gradlePlugin = { group = "org.jetbrains.compose", name = "compose-gradle-plugin", version.ref = "jetbrains-compose-plugin" }
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -42,3 +47,9 @@ jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "jetbrains-comp
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
+
+# Plugins defined by this project
+convention-jetbrainsCompose-application = { id = "convention.jetbrains.compose.application", version = "unspecified" }
+convention-jetbrainsCompose-library = { id = "convention.jetbrains.compose.library", version = "unspecified" }
+convention-kotlinMultiplatform-application = { id = "convention.kotlin.multiplatform.application", version = "unspecified" }
+convention-kotlinMultiplatform-library = { id = "convention.kotlin.multiplatform.library", version = "unspecified" }
