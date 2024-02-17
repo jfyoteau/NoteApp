@@ -42,5 +42,9 @@ gradlePlugin {
             id = "convention.jetbrains.compose.library"
             implementationClass = "jfyoteau.noteapp.convention.plugin.JetbrainsComposeLibraryConventionPlugins"
         }
+        register("FeatureLibraryConventionPlugin") {
+            id = "convention.feature"
+            implementationClass = "jfyoteau.noteapp.convention.plugin.FeatureLibraryConventionPlugin"
+        }
     }
 }

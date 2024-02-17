@@ -51,6 +51,7 @@ kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versio
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 
 # Plugins defined by this project
+convention-feature = { id = "convention.feature", version = "unspecified" }
 convention-jetbrainsCompose-application = { id = "convention.jetbrains.compose.application", version = "unspecified" }
 convention-jetbrainsCompose-library = { id = "convention.jetbrains.compose.library", version = "unspecified" }
 convention-kotlinMultiplatform-application = { id = "convention.kotlin.multiplatform.application", version = "unspecified" }
