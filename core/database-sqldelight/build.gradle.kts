@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
@@ -22,6 +21,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(libs.sqldelight.runtime)
             implementation(libs.kotlinx.datetime)
         }
     }
