@@ -1,4 +1,4 @@
-package jfyoteau.noteapp.note.presentation.root
+package jfyoteau.noteapp.presentation
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi

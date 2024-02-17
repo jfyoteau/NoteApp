@@ -4,7 +4,7 @@ import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.lifecycle.ApplicationLifecycle
 import jfyoteau.noteapp.App
-import jfyoteau.noteapp.note.presentation.root.DefaultRootComponent
+import jfyoteau.noteapp.presentation.DefaultRootComponent
 
 @OptIn(ExperimentalDecomposeApi::class)
 @Suppress("unused")

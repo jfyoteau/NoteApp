@@ -3,6 +3,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 plugins {
     alias(libs.plugins.convention.kotlinMultiplatform.application)
     alias(libs.plugins.convention.jetbrainsCompose.application)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -27,6 +28,7 @@ kotlin {
             implementation(libs.decompose)
         }
         commonMain.dependencies {
+            implementation(projects.core.presentation)
             implementation(projects.feature.note)
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)

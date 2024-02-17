@@ -8,7 +8,7 @@ import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetbrains.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import jfyoteau.noteapp.di.initKoin
-import jfyoteau.noteapp.note.presentation.root.DefaultRootComponent
+import jfyoteau.noteapp.presentation.DefaultRootComponent
 
 @OptIn(ExperimentalDecomposeApi::class)
 fun main() {

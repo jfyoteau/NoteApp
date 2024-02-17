@@ -9,7 +9,7 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stac
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import jfyoteau.noteapp.note.presentation.notedetail.NoteDetailScreen
 import jfyoteau.noteapp.note.presentation.notelist.NoteListScreen
-import jfyoteau.noteapp.note.presentation.root.RootComponent
+import jfyoteau.noteapp.presentation.RootComponent
 
 @Composable
 fun App(root: RootComponent) {
