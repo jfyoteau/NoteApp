@@ -5,6 +5,7 @@ androidx-activityCompose = "1.8.2"
 androidx-compose-bom = "2024.02.00"
 androidx-compose-compiler = "1.5.9"
 decompose = "2.2.2-compose-experimental"
+gradleVersions-plugin = "0.51.0"
 jetbrains-compose-compiler = "1.5.8"
 jetbrains-compose-plugin = "1.6.0-rc01"
 koin = "3.5.3"
@@ -43,6 +44,7 @@ kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-pl
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+gradleVersions = { id = "com.github.ben-manes.versions", version.ref = "gradleVersions-plugin" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "jetbrains-compose-plugin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
