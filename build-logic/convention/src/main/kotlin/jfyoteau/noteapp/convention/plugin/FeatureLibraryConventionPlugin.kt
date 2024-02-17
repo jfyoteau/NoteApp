@@ -18,7 +18,7 @@ class FeatureLibraryConventionPlugin: Plugin<Project> {
             extensions.configure<KotlinMultiplatformExtension> {
                 sourceSets.getByName("commonMain") {
                     dependencies {
-                        implementation(project(":core:decompose"))
+                        implementation(project(":core:presentation"))
                         implementation(libs.findLibrary("koin-core").get())
                         implementation(libs.findLibrary("kotlinx-coroutines-core").get())
                         implementation(libs.findLibrary("decompose").get())

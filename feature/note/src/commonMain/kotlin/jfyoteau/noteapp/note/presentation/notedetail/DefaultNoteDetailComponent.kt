@@ -3,7 +3,7 @@ package jfyoteau.noteapp.note.presentation.notedetail
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
-import jfyoteau.noteapp.core.decompose.coroutineScope
+import jfyoteau.appnote.core.presentation.ScreenComponent
 import jfyoteau.noteapp.note.domain.model.Note
 import jfyoteau.noteapp.note.domain.usecase.AddNote
 import jfyoteau.noteapp.note.domain.usecase.GetNote
@@ -22,20 +22,19 @@ class DefaultNoteDetailComponent(
     private val noteId: Long?,
     componentContext: ComponentContext,
     private val onBack: () -> Unit,
-) : NoteDetailComponent, ComponentContext by componentContext, KoinComponent {
+) : NoteDetailComponent, ScreenComponent(componentContext), KoinComponent {
     private val _state = MutableValue(NoteDetailState())
     override val state: Value<NoteDetailState> = _state
 
     private val _uiEvent = MutableSharedFlow<NoteDetailComponent.UiEvent>()
     override val uiEvent: Flow<NoteDetailComponent.UiEvent> = _uiEvent.asSharedFlow()
 
-    private val coroutineScope = coroutineScope()
     private val getNote: GetNote by inject()
     private val addNote: AddNote by inject()
 
     init {
         if (noteId != null) {
-            coroutineScope.launch {
+            componentScope.launch {
                 getNote(id = noteId)?.also { note ->
                     _state.value = state.value.copy(
                         noteTitle = state.value.noteTitle.copy(
@@ -106,7 +105,7 @@ class DefaultNoteDetailComponent(
     }
 
     private fun doActionSaveNote() {
-        coroutineScope.launch {
+        componentScope.launch {
             val currentMoment = Clock.System.now()
             val now = currentMoment.toLocalDateTime(TimeZone.currentSystemDefault())
             try {

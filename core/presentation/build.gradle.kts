@@ -7,10 +7,11 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.decompose)
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.koin.core)
         }
     }
 }
 
 android {
-    namespace = "jfyoteau.noteapp.core.decompose"
+    namespace = "jfyoteau.noteapp.core.presentation"
 }

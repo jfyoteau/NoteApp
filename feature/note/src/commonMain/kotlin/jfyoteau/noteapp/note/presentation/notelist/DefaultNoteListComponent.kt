@@ -3,7 +3,7 @@ package jfyoteau.noteapp.note.presentation.notelist
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
-import jfyoteau.noteapp.core.decompose.coroutineScope
+import jfyoteau.appnote.core.presentation.ScreenComponent
 import jfyoteau.noteapp.note.domain.model.Note
 import jfyoteau.noteapp.note.domain.model.NoteOrder
 import jfyoteau.noteapp.note.domain.model.OrderType
@@ -21,11 +21,10 @@ class DefaultNoteListComponent(
     componentContext: ComponentContext,
     private val onAddNote: () -> Unit,
     private val onEditNote: (noteId: Long) -> Unit
-) : NoteListComponent, ComponentContext by componentContext, KoinComponent {
+) : NoteListComponent, ScreenComponent(componentContext), KoinComponent {
     private val _state = MutableValue(NoteListState())
     override val state: Value<NoteListState> = _state
 
-    private val coroutineScope = coroutineScope()
     private val getNotes: GetNotes by inject()
     private val addNote: AddNote by inject()
     private val deleteNote: DeleteNote by inject()
@@ -50,7 +49,7 @@ class DefaultNoteListComponent(
 
     private fun doActionGetNotes(event: NoteListEvent.Order) {
         getNodesJob?.cancel()
-        getNodesJob = coroutineScope.launch {
+        getNodesJob = componentScope.launch {
             getNotes(noteOrder = event.noteOrder)
                 .onEach { notes ->
                     _state.value = state.value.copy(
@@ -63,14 +62,14 @@ class DefaultNoteListComponent(
     }
 
     private fun doActionDeleteNotes(event: NoteListEvent.DeleteNote) {
-        coroutineScope.launch {
+        componentScope.launch {
             deleteNote(note = event.note)
             recentlyDeletedNote = event.note
         }
     }
 
     private fun doActionRestoreNote() {
-        coroutineScope.launch {
+        componentScope.launch {
             addNote(note = recentlyDeletedNote ?: return@launch)
             recentlyDeletedNote = null
         }
