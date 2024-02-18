@@ -38,14 +38,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import jfyoteau.noteapp.note.presentation.notelist.component.NoteListComponent
-import jfyoteau.noteapp.note.presentation.notelist.component.NoteListEvent
 import kotlinx.coroutines.launch
 
 @Composable
 fun NoteListScreen(component: NoteListComponent) {
-    val state by component.state.subscribeAsState()
+    val uiState by component.uiState.subscribeAsState()
     val scope = rememberCoroutineScope()
-    val snackbarHostState = remember {
+    @Suppress("SpellCheckingInspection") val snackbarHostState = remember {
         SnackbarHostState()
     }
 
@@ -56,7 +55,7 @@ fun NoteListScreen(component: NoteListComponent) {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    component.onEvent(NoteListEvent.AddNote)
+                    component.addNote()
                 }
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add note")
@@ -80,7 +79,7 @@ fun NoteListScreen(component: NoteListComponent) {
                 )
                 IconButton(
                     onClick = {
-                        component.onEvent(NoteListEvent.ToggleOrderSection)
+                        component.toggleOrderSection()
                     },
                 ) {
                     Icon(
@@ -91,7 +90,7 @@ fun NoteListScreen(component: NoteListComponent) {
             }
 
             AnimatedVisibility(
-                visible = state.isOrderSectionVisible,
+                visible = uiState.isOrderSectionVisible,
                 enter = fadeIn() + slideInVertically(),
                 exit = fadeOut() + slideOutVertically()
             ) {
@@ -99,9 +98,9 @@ fun NoteListScreen(component: NoteListComponent) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 16.dp),
-                    noteOrder = state.noteOrder,
+                    noteOrder = uiState.noteOrder,
                     onOrderChange = {
-                        component.onEvent(NoteListEvent.Order(it))
+                        component.getNodes(it)
                     }
                 )
             }
@@ -113,23 +112,23 @@ fun NoteListScreen(component: NoteListComponent) {
                 contentPadding = PaddingValues(bottom = 48.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                items(state.notes) { note ->
+                items(uiState.notes) { note ->
                     NoteItem(
                         note = note,
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                component.onEvent(NoteListEvent.EditNote(note = note))
+                                component.editNote(note = note)
                             },
                         onDeleteClick = {
-                            component.onEvent(NoteListEvent.DeleteNote(note))
+                            component.deleteNote(note)
                             scope.launch {
                                 val result = snackbarHostState.showSnackbar(
                                     message = "Note deleted",
                                     actionLabel = "Undo"
                                 )
                                 if (result == SnackbarResult.ActionPerformed) {
-                                    component.onEvent(NoteListEvent.RestoreNote)
+                                    component.restoreNote()
                                 }
                             }
                         }

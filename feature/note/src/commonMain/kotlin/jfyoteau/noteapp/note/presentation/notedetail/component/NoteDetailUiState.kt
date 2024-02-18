@@ -2,7 +2,7 @@ package jfyoteau.noteapp.note.presentation.notedetail.component
 
 import jfyoteau.noteapp.note.domain.model.Note
 
-data class NoteDetailState(
+data class NoteDetailUiState(
     val noteTitle: NoteTextFieldState = NoteTextFieldState(),
     val noteContent: NoteTextFieldState = NoteTextFieldState(),
     val noteColor: Long = Note.generateRandomColor(),

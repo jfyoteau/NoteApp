@@ -1,20 +1,10 @@
 package jfyoteau.noteapp.note.presentation.notedetail.component
 
+import androidx.compose.ui.focus.FocusState
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.decompose.value.Value
-import kotlinx.coroutines.flow.Flow
+import jfyoteau.appnote.core.presentation.ScreenComponent
 
-interface NoteDetailComponent {
-    val state: Value<NoteDetailState>
-    val uiEvent: Flow<UiEvent>
-
-    fun onEvent(event: NoteDetailEvent)
-
-    sealed interface UiEvent {
-        data class ShowSnackbar(val message: String) : UiEvent
-        data object SaveNote : UiEvent
-    }
-
+interface NoteDetailComponent : ScreenComponent<NoteDetailUiState, NoteDetailUiEvent> {
     interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,
@@ -22,4 +12,12 @@ interface NoteDetailComponent {
             onBack: () -> Unit,
         ): NoteDetailComponent
     }
+
+    fun back()
+    fun enterTitle(value: String)
+    fun changeTitleFocus(focusState: FocusState)
+    fun enterContent(value: String)
+    fun changeContentFocus(focusState: FocusState)
+    fun changeColor(color: Long)
+    fun saveNote()
 }

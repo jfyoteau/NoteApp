@@ -45,21 +45,21 @@ import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import jfyoteau.noteapp.note.domain.model.Note
 import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailComponent
-import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailEvent
+import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailUiEvent
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoteDetailScreen(component: NoteDetailComponent) {
-    val state by component.state.subscribeAsState()
+    val uiState by component.uiState.subscribeAsState()
 
-    val titleState = state.noteTitle
-    val contentState = state.noteContent
+    val titleState = uiState.noteTitle
+    val contentState = uiState.noteContent
 
     val noteBackgroundAnimatable = remember {
         Animatable(
-            Color(state.noteColor)
+            Color(uiState.noteColor)
         )
     }
     val scope = rememberCoroutineScope()
@@ -68,22 +68,21 @@ fun NoteDetailScreen(component: NoteDetailComponent) {
         SnackbarHostState()
     }
 
-    LaunchedEffect(key1 = true) {
+    LaunchedEffect(key1 = Unit) {
         component.uiEvent.collectLatest { event ->
             when (event) {
-                is NoteDetailComponent.UiEvent.ShowSnackbar -> {
+                is NoteDetailUiEvent.ShowSnackbar -> {
                     snackbarHostState.showSnackbar(
                         message = event.message
                     )
                 }
 
-                is NoteDetailComponent.UiEvent.SaveNote -> {
-                    component.onEvent(NoteDetailEvent.Back)
+                is NoteDetailUiEvent.SaveNote -> {
+                    component.back()
                 }
             }
         }
     }
-
 
     Scaffold(
         topBar = {
@@ -94,16 +93,19 @@ fun NoteDetailScreen(component: NoteDetailComponent) {
                 navigationIcon = {
                     IconButton(
                         onClick = {
-                            component.onEvent(NoteDetailEvent.Back)
+                            component.back()
                         }
                     ) {
-                        Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back"
+                        )
                     }
                 },
                 actions = {
                     IconButton(
                         onClick = {
-                            component.onEvent(NoteDetailEvent.SaveNote)
+                            component.saveNote()
                         },
                     ) {
                         Icon(imageVector = Icons.Default.Save, contentDescription = "Save note")
@@ -142,7 +144,7 @@ fun NoteDetailScreen(component: NoteDetailComponent) {
                                 .background(Color(colorValue))
                                 .border(
                                     width = 3.dp,
-                                    color = if (state.noteColor == colorValue) {
+                                    color = if (uiState.noteColor == colorValue) {
                                         Color.Black
                                     } else Color.Transparent,
                                     shape = CircleShape
@@ -156,7 +158,7 @@ fun NoteDetailScreen(component: NoteDetailComponent) {
                                             )
                                         )
                                     }
-                                    component.onEvent(NoteDetailEvent.ChangeColor(colorValue))
+                                    component.changeColor(colorValue)
                                 }
                         )
                     }
@@ -169,10 +171,10 @@ fun NoteDetailScreen(component: NoteDetailComponent) {
                 text = titleState.text,
                 hint = "Enter title...",
                 onValueChange = {
-                    component.onEvent(NoteDetailEvent.EnteredTitle(it))
+                    component.enterTitle(it)
                 },
                 onFocusChange = {
-                    component.onEvent(NoteDetailEvent.ChangeTitleFocus(it))
+                    component.changeTitleFocus(it)
                 },
                 isHintVisible = titleState.isHintVisible,
                 singleLine = true,
@@ -185,10 +187,10 @@ fun NoteDetailScreen(component: NoteDetailComponent) {
                 text = contentState.text,
                 hint = "Enter some content",
                 onValueChange = {
-                    component.onEvent(NoteDetailEvent.EnteredContent(it))
+                    component.enterContent(it)
                 },
                 onFocusChange = {
-                    component.onEvent(NoteDetailEvent.ChangeContentFocus(it))
+                    component.changeContentFocus(it)
                 },
                 isHintVisible = contentState.isHintVisible,
                 textStyle = MaterialTheme.typography.bodyLarge,
