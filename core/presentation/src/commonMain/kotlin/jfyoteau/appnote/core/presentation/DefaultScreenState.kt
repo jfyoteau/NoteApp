@@ -15,9 +15,9 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-abstract class DefaultScreenComponent<UiState : Any, UiEvent>(
+abstract class DefaultScreenState<UiState : Any, UiEvent>(
     componentContext: ComponentContext,
-) : ComponentContext by componentContext, ScreenComponent<UiState, UiEvent> {
+) : ComponentContext by componentContext, ScreenState<UiState, UiEvent> {
     private val componentScope = coroutineScope()
 
     protected abstract fun setInitialUiState(): UiState

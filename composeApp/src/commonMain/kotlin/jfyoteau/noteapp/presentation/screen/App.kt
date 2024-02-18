@@ -9,21 +9,21 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stac
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import jfyoteau.noteapp.note.presentation.notedetail.screen.NoteDetailScreen
 import jfyoteau.noteapp.note.presentation.notelist.screen.NoteListScreen
-import jfyoteau.noteapp.presentation.component.RootComponent
+import jfyoteau.noteapp.presentation.state.RootState
 import jfyoteau.noteapp.splash.presentation.screen.SplashScreen
 
 @Composable
-fun App(root: RootComponent) {
+fun App(state: RootState) {
     MaterialTheme {
-        val childStack by root.childStack.subscribeAsState()
+        val childStack by state.childStack.subscribeAsState()
         Children(
             stack = childStack,
             animation = stackAnimation(slide()),
         ) { child ->
             when (val instance = child.instance) {
-                is RootComponent.Child.Splash -> SplashScreen(component = instance.component)
-                is RootComponent.Child.NoteDetail -> NoteDetailScreen(component = instance.component)
-                is RootComponent.Child.NoteList -> NoteListScreen(component = instance.component)
+                is RootState.Child.Splash -> SplashScreen(state = instance.state)
+                is RootState.Child.NoteDetail -> NoteDetailScreen(state = instance.state)
+                is RootState.Child.NoteList -> NoteListScreen(state = instance.state)
             }
         }
     }

@@ -1,4 +1,4 @@
-package jfyoteau.noteapp.note.presentation.notedetail.component
+package jfyoteau.noteapp.note.presentation.notedetail.state
 
 import jfyoteau.noteapp.note.domain.usecase.AddNote
 import jfyoteau.noteapp.note.domain.usecase.GetNote

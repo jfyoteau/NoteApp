@@ -1,7 +1,7 @@
-package jfyoteau.noteapp.note.presentation.notelist.component
+package jfyoteau.noteapp.note.presentation.notelist.state
 
 import com.arkivanov.decompose.ComponentContext
-import jfyoteau.appnote.core.presentation.DefaultScreenComponent
+import jfyoteau.appnote.core.presentation.DefaultScreenState
 import jfyoteau.noteapp.note.domain.model.Note
 import jfyoteau.noteapp.note.domain.model.NoteOrder
 import jfyoteau.noteapp.note.domain.model.OrderType
@@ -9,11 +9,11 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 
-class DefaultNoteListComponent(
+class DefaultNoteListState(
     componentContext: ComponentContext,
     private val navigation: NoteListNavigation,
     private val useCase: NoteListUseCase,
-) : NoteListComponent, DefaultScreenComponent<NoteListUiState, Nothing>(componentContext) {
+) : NoteListState, DefaultScreenState<NoteListUiState, Nothing>(componentContext) {
     private var getNodesJob: Job? = null
     private var recentlyDeletedNote: Note? = null
 

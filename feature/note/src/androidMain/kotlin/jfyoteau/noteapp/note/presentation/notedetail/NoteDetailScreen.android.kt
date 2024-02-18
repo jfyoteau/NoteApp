@@ -6,9 +6,9 @@ import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.tooling.preview.Preview
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
-import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailComponent
-import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailUiEvent
-import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailUiState
+import jfyoteau.noteapp.note.presentation.notedetail.state.NoteDetailState
+import jfyoteau.noteapp.note.presentation.notedetail.state.NoteDetailUiEvent
+import jfyoteau.noteapp.note.presentation.notedetail.state.NoteDetailUiState
 import jfyoteau.noteapp.note.presentation.notedetail.screen.NoteDetailScreen
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 private fun CommonPreview(state: NoteDetailUiState) {
     MaterialTheme {
         NoteDetailScreen(
-            component = object : NoteDetailComponent {
+            state = object : NoteDetailState {
                 override val uiState: Value<NoteDetailUiState> = MutableValue(state)
                 override val uiEvent: Flow<NoteDetailUiEvent> =
                     MutableSharedFlow<NoteDetailUiEvent>().asSharedFlow()

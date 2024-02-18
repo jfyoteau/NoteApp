@@ -1,14 +1,14 @@
 package jfyoteau.noteapp.splash.presentation.component
 
 import com.arkivanov.decompose.ComponentContext
-import jfyoteau.appnote.core.presentation.ScreenComponent
+import jfyoteau.appnote.core.presentation.ScreenState
 
-interface SplashComponent : ScreenComponent<Unit, SplashUiEvent> {
+interface SplashState : ScreenState<Unit, SplashUiEvent> {
     interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,
             onCompleted: () -> Unit,
-        ): SplashComponent
+        ): SplashState
     }
 
     fun gotoNextScreen()

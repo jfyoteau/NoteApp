@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.retainedComponent
-import jfyoteau.noteapp.di.GetRootComponent
+import jfyoteau.noteapp.di.GetRootState
 import jfyoteau.noteapp.presentation.screen.App
 
 class MainActivity : ComponentActivity() {
@@ -14,12 +14,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         // Always create the root component outside Compose on the main thread.
-        val root = retainedComponent {
-            GetRootComponent(it)
+        val rootState = retainedComponent {
+            GetRootState(it)
         }
 
         setContent {
-            App(root = root)
+            App(state = rootState)
         }
     }
 }

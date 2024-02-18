@@ -1,25 +1,25 @@
 package jfyoteau.noteapp.note.presentation
 
 import com.arkivanov.decompose.ComponentContext
-import jfyoteau.noteapp.note.presentation.notedetail.component.DefaultNoteDetailComponent
-import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailComponent
-import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailNavigation
-import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailUseCase
-import jfyoteau.noteapp.note.presentation.notelist.component.DefaultNoteListComponent
-import jfyoteau.noteapp.note.presentation.notelist.component.NoteListComponent
-import jfyoteau.noteapp.note.presentation.notelist.component.NoteListNavigation
-import jfyoteau.noteapp.note.presentation.notelist.component.NoteListUseCase
+import jfyoteau.noteapp.note.presentation.notedetail.state.DefaultNoteDetailState
+import jfyoteau.noteapp.note.presentation.notedetail.state.NoteDetailState
+import jfyoteau.noteapp.note.presentation.notedetail.state.NoteDetailNavigation
+import jfyoteau.noteapp.note.presentation.notedetail.state.NoteDetailUseCase
+import jfyoteau.noteapp.note.presentation.notelist.state.DefaultNoteListState
+import jfyoteau.noteapp.note.presentation.notelist.state.NoteListState
+import jfyoteau.noteapp.note.presentation.notelist.state.NoteListNavigation
+import jfyoteau.noteapp.note.presentation.notelist.state.NoteListUseCase
 import org.koin.dsl.module
 
 val presentationModule = module {
-    single<NoteListComponent.Factory> {
-        object: NoteListComponent.Factory {
+    single<NoteListState.Factory> {
+        object: NoteListState.Factory {
             override operator fun invoke(
                 componentContext: ComponentContext,
                 onAddNote: () -> Unit,
                 onEditNote: (noteId: Long) -> Unit
-            ): NoteListComponent {
-                return DefaultNoteListComponent(
+            ): NoteListState {
+                return DefaultNoteListState(
                     componentContext = componentContext,
                     navigation = NoteListNavigation(
                         onAddNote = onAddNote,
@@ -35,14 +35,14 @@ val presentationModule = module {
         }
     }
 
-    single<NoteDetailComponent.Factory> {
-        object: NoteDetailComponent.Factory {
+    single<NoteDetailState.Factory> {
+        object: NoteDetailState.Factory {
             override operator fun invoke(
                 componentContext: ComponentContext,
                 noteId: Long?,
                 onBack: () -> Unit
-            ): NoteDetailComponent {
-                return DefaultNoteDetailComponent(
+            ): NoteDetailState {
+                return DefaultNoteDetailState(
                     componentContext = componentContext,
                     noteId = noteId,
                     navigation = NoteDetailNavigation(

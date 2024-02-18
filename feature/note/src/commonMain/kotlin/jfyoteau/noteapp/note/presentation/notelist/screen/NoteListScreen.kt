@@ -37,12 +37,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
-import jfyoteau.noteapp.note.presentation.notelist.component.NoteListComponent
+import jfyoteau.noteapp.note.presentation.notelist.state.NoteListState
 import kotlinx.coroutines.launch
 
 @Composable
-fun NoteListScreen(component: NoteListComponent) {
-    val uiState by component.uiState.subscribeAsState()
+fun NoteListScreen(state: NoteListState) {
+    val uiState by state.uiState.subscribeAsState()
     val scope = rememberCoroutineScope()
     @Suppress("SpellCheckingInspection") val snackbarHostState = remember {
         SnackbarHostState()
@@ -55,7 +55,7 @@ fun NoteListScreen(component: NoteListComponent) {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    component.addNote()
+                    state.addNote()
                 }
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add note")
@@ -79,7 +79,7 @@ fun NoteListScreen(component: NoteListComponent) {
                 )
                 IconButton(
                     onClick = {
-                        component.toggleOrderSection()
+                        state.toggleOrderSection()
                     },
                 ) {
                     Icon(
@@ -100,7 +100,7 @@ fun NoteListScreen(component: NoteListComponent) {
                         .padding(vertical = 16.dp),
                     noteOrder = uiState.noteOrder,
                     onOrderChange = {
-                        component.getNodes(it)
+                        state.getNodes(it)
                     }
                 )
             }
@@ -118,17 +118,17 @@ fun NoteListScreen(component: NoteListComponent) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                component.editNote(note = note)
+                                state.editNote(note = note)
                             },
                         onDeleteClick = {
-                            component.deleteNote(note)
+                            state.deleteNote(note)
                             scope.launch {
                                 val result = snackbarHostState.showSnackbar(
                                     message = "Note deleted",
                                     actionLabel = "Undo"
                                 )
                                 if (result == SnackbarResult.ActionPerformed) {
-                                    component.restoreNote()
+                                    state.restoreNote()
                                 }
                             }
                         }

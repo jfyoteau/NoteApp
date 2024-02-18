@@ -1,15 +1,15 @@
 package jfyoteau.noteapp.presentation
 
 import com.arkivanov.decompose.ComponentContext
-import jfyoteau.noteapp.presentation.component.DefaultRootComponent
-import jfyoteau.noteapp.presentation.component.RootComponent
+import jfyoteau.noteapp.presentation.state.DefaultRootState
+import jfyoteau.noteapp.presentation.state.RootState
 import org.koin.dsl.module
 
 val presentationModule = module {
-    single<RootComponent.Factory> {
-        object : RootComponent.Factory {
-            override operator fun invoke(componentContext: ComponentContext): RootComponent {
-                return DefaultRootComponent(
+    single<RootState.Factory> {
+        object : RootState.Factory {
+            override operator fun invoke(componentContext: ComponentContext): RootState {
+                return DefaultRootState(
                     componentContext = componentContext,
                     splashFactory = get(),
                     noteListFactory = get(),

@@ -1,4 +1,4 @@
-package jfyoteau.noteapp.presentation.component
+package jfyoteau.noteapp.presentation.state
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
@@ -9,20 +9,20 @@ import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.router.stack.replaceAll
 import com.arkivanov.decompose.value.Value
-import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailComponent
-import jfyoteau.noteapp.note.presentation.notelist.component.NoteListComponent
-import jfyoteau.noteapp.splash.presentation.component.SplashComponent
+import jfyoteau.noteapp.note.presentation.notedetail.state.NoteDetailState
+import jfyoteau.noteapp.note.presentation.notelist.state.NoteListState
+import jfyoteau.noteapp.splash.presentation.component.SplashState
 import kotlinx.serialization.Serializable
 
-class DefaultRootComponent(
+class DefaultRootState(
     componentContext: ComponentContext,
-    private val splashFactory: SplashComponent.Factory,
-    private val noteListFactory: NoteListComponent.Factory,
-    private val noteDetailFactory: NoteDetailComponent.Factory,
-) : RootComponent, ComponentContext by componentContext {
+    private val splashFactory: SplashState.Factory,
+    private val noteListFactory: NoteListState.Factory,
+    private val noteDetailFactory: NoteDetailState.Factory,
+) : RootState, ComponentContext by componentContext {
     private val navigation = StackNavigation<Configuration>()
 
-    override val childStack: Value<ChildStack<*, RootComponent.Child>> = childStack(
+    override val childStack: Value<ChildStack<*, RootState.Child>> = childStack(
         source = navigation,
         serializer = Configuration.serializer(),
         initialConfiguration = Configuration.Splash,
@@ -33,23 +33,23 @@ class DefaultRootComponent(
     private fun createChild(
         configuration: Configuration,
         context: ComponentContext,
-    ): RootComponent.Child {
+    ): RootState.Child {
         return when (configuration) {
-            is Configuration.Splash -> RootComponent.Child.Splash(
+            is Configuration.Splash -> RootState.Child.Splash(
                 splashComponent(context)
             )
 
-            is Configuration.NoteList -> RootComponent.Child.NoteList(
+            is Configuration.NoteList -> RootState.Child.NoteList(
                 listComponent(context)
             )
 
-            is Configuration.NoteDetail -> RootComponent.Child.NoteDetail(
+            is Configuration.NoteDetail -> RootState.Child.NoteDetail(
                 detailComponent(context, configuration.noteId)
             )
         }
     }
 
-    private fun splashComponent(context: ComponentContext): SplashComponent {
+    private fun splashComponent(context: ComponentContext): SplashState {
         return splashFactory(
             componentContext = context,
             onCompleted = {
@@ -59,7 +59,7 @@ class DefaultRootComponent(
     }
 
     @OptIn(ExperimentalDecomposeApi::class)
-    private fun listComponent(context: ComponentContext): NoteListComponent {
+    private fun listComponent(context: ComponentContext): NoteListState {
         return noteListFactory(
             componentContext = context,
             onAddNote = {
@@ -71,7 +71,7 @@ class DefaultRootComponent(
         )
     }
 
-    private fun detailComponent(context: ComponentContext, noteId: Long?): NoteDetailComponent {
+    private fun detailComponent(context: ComponentContext, noteId: Long?): NoteDetailState {
         return noteDetailFactory(
             componentContext = context,
             noteId = noteId,

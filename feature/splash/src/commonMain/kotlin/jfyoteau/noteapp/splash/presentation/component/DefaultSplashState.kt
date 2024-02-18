@@ -1,13 +1,13 @@
 package jfyoteau.noteapp.splash.presentation.component
 
 import com.arkivanov.decompose.ComponentContext
-import jfyoteau.appnote.core.presentation.DefaultScreenComponent
+import jfyoteau.appnote.core.presentation.DefaultScreenState
 import kotlinx.coroutines.delay
 
-class DefaultSplashComponent(
+class DefaultSplashState(
     componentContext: ComponentContext,
     private val navigation: SplashNavigation,
-) : DefaultScreenComponent<Unit, SplashUiEvent>(componentContext), SplashComponent {
+) : DefaultScreenState<Unit, SplashUiEvent>(componentContext), SplashState {
     init {
         doAction {
             delay(3000)

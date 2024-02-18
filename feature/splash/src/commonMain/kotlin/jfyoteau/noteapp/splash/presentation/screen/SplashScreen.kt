@@ -7,19 +7,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import jfyoteau.noteapp.splash.presentation.component.SplashComponent
+import jfyoteau.noteapp.splash.presentation.component.SplashState
 import jfyoteau.noteapp.splash.presentation.component.SplashUiEvent
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun SplashScreen(
-    component: SplashComponent,
+    state: SplashState,
 ) {
     LaunchedEffect(key1 = Unit) {
-        component.uiEvent.collectLatest { event ->
+        state.uiEvent.collectLatest { event ->
             when (event) {
                 is SplashUiEvent.Completed -> {
-                    component.gotoNextScreen()
+                    state.gotoNextScreen()
                 }
             }
         }

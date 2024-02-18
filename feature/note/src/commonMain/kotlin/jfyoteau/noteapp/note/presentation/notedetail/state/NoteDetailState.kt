@@ -1,16 +1,16 @@
-package jfyoteau.noteapp.note.presentation.notedetail.component
+package jfyoteau.noteapp.note.presentation.notedetail.state
 
 import androidx.compose.ui.focus.FocusState
 import com.arkivanov.decompose.ComponentContext
-import jfyoteau.appnote.core.presentation.ScreenComponent
+import jfyoteau.appnote.core.presentation.ScreenState
 
-interface NoteDetailComponent : ScreenComponent<NoteDetailUiState, NoteDetailUiEvent> {
+interface NoteDetailState : ScreenState<NoteDetailUiState, NoteDetailUiEvent> {
     interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,
             noteId: Long?,
             onBack: () -> Unit,
-        ): NoteDetailComponent
+        ): NoteDetailState
     }
 
     fun back()

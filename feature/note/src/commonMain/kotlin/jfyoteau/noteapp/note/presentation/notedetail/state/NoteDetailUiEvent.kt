@@ -1,4 +1,4 @@
-package jfyoteau.noteapp.note.presentation.notedetail.component
+package jfyoteau.noteapp.note.presentation.notedetail.state
 
 sealed interface NoteDetailUiEvent {
     data class ShowSnackbar(val message: String) : NoteDetailUiEvent

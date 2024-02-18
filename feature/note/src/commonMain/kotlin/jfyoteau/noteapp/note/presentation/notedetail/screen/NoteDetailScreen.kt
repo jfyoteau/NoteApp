@@ -44,15 +44,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import jfyoteau.noteapp.note.domain.model.Note
-import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailComponent
-import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailUiEvent
+import jfyoteau.noteapp.note.presentation.notedetail.state.NoteDetailState
+import jfyoteau.noteapp.note.presentation.notedetail.state.NoteDetailUiEvent
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NoteDetailScreen(component: NoteDetailComponent) {
-    val uiState by component.uiState.subscribeAsState()
+fun NoteDetailScreen(state: NoteDetailState) {
+    val uiState by state.uiState.subscribeAsState()
 
     val titleState = uiState.noteTitle
     val contentState = uiState.noteContent
@@ -69,7 +69,7 @@ fun NoteDetailScreen(component: NoteDetailComponent) {
     }
 
     LaunchedEffect(key1 = Unit) {
-        component.uiEvent.collectLatest { event ->
+        state.uiEvent.collectLatest { event ->
             when (event) {
                 is NoteDetailUiEvent.ShowSnackbar -> {
                     snackbarHostState.showSnackbar(
@@ -78,7 +78,7 @@ fun NoteDetailScreen(component: NoteDetailComponent) {
                 }
 
                 is NoteDetailUiEvent.SaveNote -> {
-                    component.back()
+                    state.back()
                 }
             }
         }
@@ -93,7 +93,7 @@ fun NoteDetailScreen(component: NoteDetailComponent) {
                 navigationIcon = {
                     IconButton(
                         onClick = {
-                            component.back()
+                            state.back()
                         }
                     ) {
                         Icon(
@@ -105,7 +105,7 @@ fun NoteDetailScreen(component: NoteDetailComponent) {
                 actions = {
                     IconButton(
                         onClick = {
-                            component.saveNote()
+                            state.saveNote()
                         },
                     ) {
                         Icon(imageVector = Icons.Default.Save, contentDescription = "Save note")
@@ -158,7 +158,7 @@ fun NoteDetailScreen(component: NoteDetailComponent) {
                                             )
                                         )
                                     }
-                                    component.changeColor(colorValue)
+                                    state.changeColor(colorValue)
                                 }
                         )
                     }
@@ -171,10 +171,10 @@ fun NoteDetailScreen(component: NoteDetailComponent) {
                 text = titleState.text,
                 hint = "Enter title...",
                 onValueChange = {
-                    component.enterTitle(it)
+                    state.enterTitle(it)
                 },
                 onFocusChange = {
-                    component.changeTitleFocus(it)
+                    state.changeTitleFocus(it)
                 },
                 isHintVisible = titleState.isHintVisible,
                 singleLine = true,
@@ -187,10 +187,10 @@ fun NoteDetailScreen(component: NoteDetailComponent) {
                 text = contentState.text,
                 hint = "Enter some content",
                 onValueChange = {
-                    component.enterContent(it)
+                    state.enterContent(it)
                 },
                 onFocusChange = {
-                    component.changeContentFocus(it)
+                    state.changeContentFocus(it)
                 },
                 isHintVisible = contentState.isHintVisible,
                 textStyle = MaterialTheme.typography.bodyLarge,

@@ -1,19 +1,19 @@
 package jfyoteau.noteapp.splash.presentation
 
 import com.arkivanov.decompose.ComponentContext
-import jfyoteau.noteapp.splash.presentation.component.DefaultSplashComponent
-import jfyoteau.noteapp.splash.presentation.component.SplashComponent
+import jfyoteau.noteapp.splash.presentation.component.DefaultSplashState
+import jfyoteau.noteapp.splash.presentation.component.SplashState
 import jfyoteau.noteapp.splash.presentation.component.SplashNavigation
 import org.koin.dsl.module
 
 val presentationModule = module {
-    single<SplashComponent.Factory> {
-        object : SplashComponent.Factory {
+    single<SplashState.Factory> {
+        object : SplashState.Factory {
             override fun invoke(
                 componentContext: ComponentContext,
                 onCompleted: () -> Unit
-            ): SplashComponent {
-                return DefaultSplashComponent(
+            ): SplashState {
+                return DefaultSplashState(
                     componentContext = componentContext,
                     navigation = SplashNavigation(
                         onCompleted = onCompleted,

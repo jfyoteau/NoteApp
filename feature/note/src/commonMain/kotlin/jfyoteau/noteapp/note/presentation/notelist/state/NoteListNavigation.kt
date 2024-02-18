@@ -1,4 +1,4 @@
-package jfyoteau.noteapp.note.presentation.notelist.component
+package jfyoteau.noteapp.note.presentation.notelist.state
 
 class NoteListNavigation(
     val onAddNote: () -> Unit,

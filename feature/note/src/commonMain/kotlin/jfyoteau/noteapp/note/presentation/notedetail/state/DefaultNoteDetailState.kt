@@ -1,20 +1,20 @@
-package jfyoteau.noteapp.note.presentation.notedetail.component
+package jfyoteau.noteapp.note.presentation.notedetail.state
 
 import androidx.compose.ui.focus.FocusState
 import com.arkivanov.decompose.ComponentContext
-import jfyoteau.appnote.core.presentation.DefaultScreenComponent
+import jfyoteau.appnote.core.presentation.DefaultScreenState
 import jfyoteau.noteapp.note.domain.model.Note
 import jfyoteau.noteapp.note.domain.usecase.InvalidNoteException
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
-class DefaultNoteDetailComponent(
+class DefaultNoteDetailState(
     componentContext: ComponentContext,
     private val noteId: Long?,
     private val navigation: NoteDetailNavigation,
     private val useCase: NoteDetailUseCase,
-) : NoteDetailComponent, DefaultScreenComponent<NoteDetailUiState, NoteDetailUiEvent>(componentContext) {
+) : NoteDetailState, DefaultScreenState<NoteDetailUiState, NoteDetailUiEvent>(componentContext) {
     init {
         if (noteId != null) {
             getNote(noteId = noteId)
