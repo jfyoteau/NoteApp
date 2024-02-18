@@ -1,4 +1,4 @@
-package jfyoteau.noteapp.note.presentation.notelist
+package jfyoteau.noteapp.note.presentation.notelist.component
 
 import jfyoteau.noteapp.note.domain.model.Note
 import jfyoteau.noteapp.note.domain.model.NoteOrder

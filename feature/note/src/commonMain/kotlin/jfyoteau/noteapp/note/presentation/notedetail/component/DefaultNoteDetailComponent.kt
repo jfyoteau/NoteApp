@@ -1,12 +1,10 @@
-package jfyoteau.noteapp.note.presentation.notedetail
+package jfyoteau.noteapp.note.presentation.notedetail.component
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import jfyoteau.appnote.core.presentation.ScreenComponent
 import jfyoteau.noteapp.note.domain.model.Note
-import jfyoteau.noteapp.note.domain.usecase.AddNote
-import jfyoteau.noteapp.note.domain.usecase.GetNote
 import jfyoteau.noteapp.note.domain.usecase.InvalidNoteException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -15,27 +13,23 @@ import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 class DefaultNoteDetailComponent(
-    private val noteId: Long?,
     componentContext: ComponentContext,
-    private val onBack: () -> Unit,
-) : NoteDetailComponent, ScreenComponent(componentContext), KoinComponent {
+    private val noteId: Long?,
+    private val navigation: NoteDetailNavigation,
+    private val useCase: NoteDetailUseCase,
+) : NoteDetailComponent, ScreenComponent(componentContext) {
     private val _state = MutableValue(NoteDetailState())
     override val state: Value<NoteDetailState> = _state
 
     private val _uiEvent = MutableSharedFlow<NoteDetailComponent.UiEvent>()
     override val uiEvent: Flow<NoteDetailComponent.UiEvent> = _uiEvent.asSharedFlow()
 
-    private val getNote: GetNote by inject()
-    private val addNote: AddNote by inject()
-
     init {
         if (noteId != null) {
             componentScope.launch {
-                getNote(id = noteId)?.also { note ->
+                useCase.getNote(id = noteId)?.also { note ->
                     _state.value = state.value.copy(
                         noteTitle = state.value.noteTitle.copy(
                             text = note.title,
@@ -63,7 +57,7 @@ class DefaultNoteDetailComponent(
     }
 
     private fun doActionBack() {
-        onBack()
+        navigation.onBack()
     }
 
     private fun doActionChangeColor(event: NoteDetailEvent.ChangeColor) {
@@ -109,7 +103,7 @@ class DefaultNoteDetailComponent(
             val currentMoment = Clock.System.now()
             val now = currentMoment.toLocalDateTime(TimeZone.currentSystemDefault())
             try {
-                addNote(
+                useCase.addNote(
                     note = Note(
                         id = noteId,
                         title = state.value.noteTitle.text,

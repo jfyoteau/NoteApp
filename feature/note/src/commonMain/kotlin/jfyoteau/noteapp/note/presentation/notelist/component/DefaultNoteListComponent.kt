@@ -1,4 +1,4 @@
-package jfyoteau.noteapp.note.presentation.notelist
+package jfyoteau.noteapp.note.presentation.notelist.component
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
@@ -7,27 +7,18 @@ import jfyoteau.appnote.core.presentation.ScreenComponent
 import jfyoteau.noteapp.note.domain.model.Note
 import jfyoteau.noteapp.note.domain.model.NoteOrder
 import jfyoteau.noteapp.note.domain.model.OrderType
-import jfyoteau.noteapp.note.domain.usecase.AddNote
-import jfyoteau.noteapp.note.domain.usecase.DeleteNote
-import jfyoteau.noteapp.note.domain.usecase.GetNotes
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 class DefaultNoteListComponent(
     componentContext: ComponentContext,
-    private val onAddNote: () -> Unit,
-    private val onEditNote: (noteId: Long) -> Unit
-) : NoteListComponent, ScreenComponent(componentContext), KoinComponent {
+    private val navigation: NoteListNavigation,
+    private val useCase: NoteListUseCase,
+) : NoteListComponent, ScreenComponent(componentContext) {
     private val _state = MutableValue(NoteListState())
     override val state: Value<NoteListState> = _state
-
-    private val getNotes: GetNotes by inject()
-    private val addNote: AddNote by inject()
-    private val deleteNote: DeleteNote by inject()
 
     private var getNodesJob: Job? = null
     private var recentlyDeletedNote: Note? = null
@@ -50,7 +41,7 @@ class DefaultNoteListComponent(
     private fun doActionGetNotes(event: NoteListEvent.Order) {
         getNodesJob?.cancel()
         getNodesJob = componentScope.launch {
-            getNotes(noteOrder = event.noteOrder)
+            useCase.getNotes(noteOrder = event.noteOrder)
                 .onEach { notes ->
                     _state.value = state.value.copy(
                         notes = notes,
@@ -63,14 +54,14 @@ class DefaultNoteListComponent(
 
     private fun doActionDeleteNotes(event: NoteListEvent.DeleteNote) {
         componentScope.launch {
-            deleteNote(note = event.note)
+            useCase.deleteNote(note = event.note)
             recentlyDeletedNote = event.note
         }
     }
 
     private fun doActionRestoreNote() {
         componentScope.launch {
-            addNote(note = recentlyDeletedNote ?: return@launch)
+            useCase.addNote(note = recentlyDeletedNote ?: return@launch)
             recentlyDeletedNote = null
         }
     }
@@ -82,11 +73,11 @@ class DefaultNoteListComponent(
     }
 
     private fun doActionAddNote() {
-        onAddNote()
+        navigation.onAddNote()
     }
 
     private fun doActionEditNote(event: NoteListEvent.EditNote) {
         val noteId = event.note.id ?: return
-        onEditNote(noteId)
+        navigation.onEditNote(noteId)
     }
 }

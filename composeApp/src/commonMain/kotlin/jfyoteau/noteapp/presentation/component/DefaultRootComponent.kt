@@ -1,4 +1,4 @@
-package jfyoteau.noteapp.presentation
+package jfyoteau.noteapp.presentation.component
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
@@ -8,12 +8,14 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.value.Value
-import jfyoteau.noteapp.note.presentation.notedetail.DefaultNoteDetailComponent
-import jfyoteau.noteapp.note.presentation.notelist.DefaultNoteListComponent
+import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailComponent
+import jfyoteau.noteapp.note.presentation.notelist.component.NoteListComponent
 import kotlinx.serialization.Serializable
 
 class DefaultRootComponent(
     componentContext: ComponentContext,
+    private val noteListFactory: NoteListComponent.Factory,
+    private val noteDetailFactory: NoteDetailComponent.Factory,
 ) : RootComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<Configuration>()
 
@@ -25,34 +27,42 @@ class DefaultRootComponent(
         childFactory = ::createChild,
     )
 
-    @OptIn(ExperimentalDecomposeApi::class)
     private fun createChild(
         configuration: Configuration,
         context: ComponentContext,
     ): RootComponent.Child {
         return when (configuration) {
             is Configuration.NoteList -> RootComponent.Child.NoteList(
-                DefaultNoteListComponent(
-                    componentContext = context,
-                    onAddNote = {
-                        navigation.pushNew(Configuration.NoteDetail())
-                    },
-                    onEditNote = { noteId ->
-                        navigation.pushNew(Configuration.NoteDetail(noteId = noteId))
-                    },
-                )
+                listComponent(context)
             )
 
             is Configuration.NoteDetail -> RootComponent.Child.NoteDetail(
-                DefaultNoteDetailComponent(
-                    noteId = configuration.noteId,
-                    componentContext = context,
-                    onBack = {
-                        navigation.pop()
-                    }
-                )
+                detailComponent(context, configuration.noteId)
             )
         }
+    }
+
+    @OptIn(ExperimentalDecomposeApi::class)
+    private fun listComponent(context: ComponentContext): NoteListComponent {
+        return noteListFactory(
+            componentContext = context,
+            onAddNote = {
+                navigation.pushNew(Configuration.NoteDetail())
+            },
+            onEditNote = { noteId ->
+                navigation.pushNew(Configuration.NoteDetail(noteId = noteId))
+            },
+        )
+    }
+
+    private fun detailComponent(context: ComponentContext, noteId: Long?): NoteDetailComponent {
+        return noteDetailFactory(
+            componentContext = context,
+            noteId = noteId,
+            onBack = {
+                navigation.pop()
+            },
+        )
     }
 
     // Screen parameters.

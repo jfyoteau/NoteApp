@@ -1,4 +1,4 @@
-package jfyoteau.noteapp
+package jfyoteau.noteapp.presentation.screen
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -7,9 +7,9 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
-import jfyoteau.noteapp.note.presentation.notedetail.NoteDetailScreen
-import jfyoteau.noteapp.note.presentation.notelist.NoteListScreen
-import jfyoteau.noteapp.presentation.RootComponent
+import jfyoteau.noteapp.note.presentation.notedetail.screen.NoteDetailScreen
+import jfyoteau.noteapp.note.presentation.notelist.screen.NoteListScreen
+import jfyoteau.noteapp.presentation.component.RootComponent
 
 @Composable
 fun App(root: RootComponent) {

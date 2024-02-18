@@ -1,4 +1,4 @@
-package jfyoteau.noteapp.note.presentation.notedetail
+package jfyoteau.noteapp.note.presentation.notedetail.component
 
 import androidx.compose.ui.focus.FocusState
 

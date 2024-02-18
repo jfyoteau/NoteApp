@@ -5,6 +5,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
+import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailComponent
+import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailEvent
+import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailState
+import jfyoteau.noteapp.note.presentation.notedetail.screen.NoteDetailScreen
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow

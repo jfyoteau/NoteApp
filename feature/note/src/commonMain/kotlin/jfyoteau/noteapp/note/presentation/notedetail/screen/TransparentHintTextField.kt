@@ -1,4 +1,4 @@
-package jfyoteau.noteapp.note.presentation.notedetail.composable
+package jfyoteau.noteapp.note.presentation.notedetail.screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth

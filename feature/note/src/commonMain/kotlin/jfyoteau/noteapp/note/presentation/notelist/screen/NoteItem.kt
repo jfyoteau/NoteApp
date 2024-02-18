@@ -1,4 +1,4 @@
-package jfyoteau.noteapp.note.presentation.notelist.composable
+package jfyoteau.noteapp.note.presentation.notelist.screen
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box

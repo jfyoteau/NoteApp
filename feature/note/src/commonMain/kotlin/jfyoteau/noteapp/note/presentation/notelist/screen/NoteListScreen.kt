@@ -1,4 +1,4 @@
-package jfyoteau.noteapp.note.presentation.notelist
+package jfyoteau.noteapp.note.presentation.notelist.screen
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -8,6 +8,7 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -36,8 +37,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
-import jfyoteau.noteapp.note.presentation.notelist.composable.NoteItem
-import jfyoteau.noteapp.note.presentation.notelist.composable.OrderSection
+import jfyoteau.noteapp.note.presentation.notelist.component.NoteListComponent
+import jfyoteau.noteapp.note.presentation.notelist.component.NoteListEvent
 import kotlinx.coroutines.launch
 
 @Composable
@@ -88,6 +89,7 @@ fun NoteListScreen(component: NoteListComponent) {
                     )
                 }
             }
+
             AnimatedVisibility(
                 visible = state.isOrderSectionVisible,
                 enter = fadeIn() + slideInVertically(),
@@ -103,8 +105,14 @@ fun NoteListScreen(component: NoteListComponent) {
                     }
                 )
             }
+
             Spacer(modifier = Modifier.height(16.dp))
-            LazyColumn(modifier = Modifier.fillMaxSize()) {
+
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(bottom = 48.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
                 items(state.notes) { note ->
                     NoteItem(
                         note = note,
@@ -126,7 +134,6 @@ fun NoteListScreen(component: NoteListComponent) {
                             }
                         }
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
                 }
             }
         }

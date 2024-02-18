@@ -1,4 +1,4 @@
-package jfyoteau.noteapp.note.presentation.notedetail
+package jfyoteau.noteapp.note.presentation.notedetail.screen
 
 import androidx.compose.animation.Animatable
 import androidx.compose.animation.core.tween
@@ -44,7 +44,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import jfyoteau.noteapp.note.domain.model.Note
-import jfyoteau.noteapp.note.presentation.notedetail.composable.TransparentHintTextField
+import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailComponent
+import jfyoteau.noteapp.note.presentation.notedetail.component.NoteDetailEvent
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
