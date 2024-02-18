@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.convention.kotlinMultiplatform.library)
-    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
