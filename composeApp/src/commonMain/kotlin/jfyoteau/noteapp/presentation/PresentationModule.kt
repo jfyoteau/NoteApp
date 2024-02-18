@@ -11,6 +11,7 @@ val presentationModule = module {
             override operator fun invoke(componentContext: ComponentContext): RootComponent {
                 return DefaultRootComponent(
                     componentContext = componentContext,
+                    splashFactory = get(),
                     noteListFactory = get(),
                     noteDetailFactory = get(),
                 )

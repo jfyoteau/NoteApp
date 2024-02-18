@@ -28,6 +28,7 @@ kotlin {
             implementation(libs.decompose)
         }
         commonMain.dependencies {
+            implementation(projects.feature.splash)
             implementation(projects.feature.note)
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
