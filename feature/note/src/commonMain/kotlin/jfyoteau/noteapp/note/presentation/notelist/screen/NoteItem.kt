@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -27,7 +25,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import jfyoteau.appnote.core.ui.ColorUtils
 import jfyoteau.noteapp.note.domain.model.Note
+import noteapp.feature.note.generated.resources.Res
+import noteapp.feature.note.generated.resources.icon_delete
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun NoteItem(
     note: Note,
@@ -91,7 +94,7 @@ fun NoteItem(
             modifier = Modifier.align(Alignment.BottomEnd)
         ) {
             Icon(
-                imageVector = Icons.Default.Delete,
+                painter = painterResource(Res.drawable.icon_delete),
                 contentDescription = "Delete note",
                 tint = MaterialTheme.colorScheme.onSurface
             )

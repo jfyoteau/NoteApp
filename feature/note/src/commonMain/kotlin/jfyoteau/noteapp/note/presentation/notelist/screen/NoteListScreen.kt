@@ -17,9 +17,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Sort
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -39,7 +36,13 @@ import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import jfyoteau.noteapp.note.presentation.notelist.state.NoteListState
 import kotlinx.coroutines.launch
+import noteapp.feature.note.generated.resources.Res
+import noteapp.feature.note.generated.resources.icon_add
+import noteapp.feature.note.generated.resources.icon_sort
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun NoteListScreen(state: NoteListState) {
     val uiState by state.uiState.subscribeAsState()
@@ -58,7 +61,10 @@ fun NoteListScreen(state: NoteListState) {
                     state.addNote()
                 }
             ) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Add note")
+                Icon(
+                    painter = painterResource(Res.drawable.icon_add),
+                    contentDescription = "Add note",
+                )
             }
         },
     ) { paddingValues ->
@@ -83,8 +89,8 @@ fun NoteListScreen(state: NoteListState) {
                     },
                 ) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Filled.Sort,
-                        contentDescription = "Sort"
+                        painter = painterResource(Res.drawable.icon_sort),
+                        contentDescription = null,
                     )
                 }
             }

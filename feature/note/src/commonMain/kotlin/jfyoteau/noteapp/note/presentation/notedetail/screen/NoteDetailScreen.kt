@@ -18,9 +18,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -48,8 +45,13 @@ import jfyoteau.noteapp.note.presentation.notedetail.state.NoteDetailState
 import jfyoteau.noteapp.note.presentation.notedetail.state.NoteDetailUiEvent
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import noteapp.feature.note.generated.resources.Res
+import noteapp.feature.note.generated.resources.icon_back
+import noteapp.feature.note.generated.resources.icon_save
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalResourceApi::class)
 @Composable
 fun NoteDetailScreen(state: NoteDetailState) {
     val uiState by state.uiState.subscribeAsState()
@@ -97,8 +99,8 @@ fun NoteDetailScreen(state: NoteDetailState) {
                         }
                     ) {
                         Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            painter = painterResource(Res.drawable.icon_back),
+                            contentDescription = "Back",
                         )
                     }
                 },
@@ -108,7 +110,10 @@ fun NoteDetailScreen(state: NoteDetailState) {
                             state.saveNote()
                         },
                     ) {
-                        Icon(imageVector = Icons.Default.Save, contentDescription = "Save note")
+                        Icon(
+                            painter = painterResource(Res.drawable.icon_save),
+                            contentDescription = "Save note",
+                        )
                     }
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
