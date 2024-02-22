@@ -11,7 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import jfyoteau.noteapp.note.domain.model.NoteOrder
 import jfyoteau.noteapp.note.domain.model.OrderType
+import noteapp.feature.note.generated.resources.Res
+import noteapp.feature.note.generated.resources.ascending
+import noteapp.feature.note.generated.resources.color
+import noteapp.feature.note.generated.resources.date
+import noteapp.feature.note.generated.resources.descending
+import noteapp.feature.note.generated.resources.title
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun OrderSection(
     modifier: Modifier = Modifier,
@@ -25,19 +34,21 @@ fun OrderSection(
             modifier = Modifier.fillMaxWidth()
         ) {
             DefaultRadioButton(
-                text = "Title",
+                text = stringResource(Res.string.title),
                 selected = noteOrder is NoteOrder.Title,
-                onSelect = { onOrderChange(NoteOrder.Title(noteOrder.orderType)) }
+                onSelect = {
+                    onOrderChange(NoteOrder.Title(noteOrder.orderType))
+                }
             )
             Spacer(modifier = Modifier.width(8.dp))
             DefaultRadioButton(
-                text = "Date",
+                text = stringResource(Res.string.date),
                 selected = noteOrder is NoteOrder.Date,
                 onSelect = { onOrderChange(NoteOrder.Date(noteOrder.orderType)) }
             )
             Spacer(modifier = Modifier.width(8.dp))
             DefaultRadioButton(
-                text = "Color",
+                text = stringResource(Res.string.color),
                 selected = noteOrder is NoteOrder.Color,
                 onSelect = { onOrderChange(NoteOrder.Color(noteOrder.orderType)) }
             )
@@ -47,7 +58,7 @@ fun OrderSection(
             modifier = Modifier.fillMaxWidth()
         ) {
             DefaultRadioButton(
-                text = "Ascending",
+                text = stringResource(Res.string.ascending),
                 selected = noteOrder.orderType == OrderType.Ascending,
                 onSelect = {
                     onOrderChange(noteOrder.copy(OrderType.Ascending))
@@ -55,7 +66,7 @@ fun OrderSection(
             )
             Spacer(modifier = Modifier.width(8.dp))
             DefaultRadioButton(
-                text = "Descending",
+                text = stringResource(Res.string.descending),
                 selected = noteOrder.orderType == OrderType.Descending,
                 onSelect = {
                     onOrderChange(noteOrder.copy(OrderType.Descending))

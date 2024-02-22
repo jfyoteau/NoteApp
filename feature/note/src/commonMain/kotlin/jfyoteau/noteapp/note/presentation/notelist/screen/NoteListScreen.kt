@@ -37,10 +37,16 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import jfyoteau.noteapp.note.presentation.notelist.state.NoteListState
 import kotlinx.coroutines.launch
 import noteapp.feature.note.generated.resources.Res
+import noteapp.feature.note.generated.resources.add_note
 import noteapp.feature.note.generated.resources.icon_add
 import noteapp.feature.note.generated.resources.icon_sort
+import noteapp.feature.note.generated.resources.note_deleted
+import noteapp.feature.note.generated.resources.undo
+import noteapp.feature.note.generated.resources.your_note
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
@@ -63,7 +69,7 @@ fun NoteListScreen(state: NoteListState) {
             ) {
                 Icon(
                     painter = painterResource(Res.drawable.icon_add),
-                    contentDescription = "Add note",
+                    contentDescription = stringResource(Res.string.add_note),
                 )
             }
         },
@@ -80,7 +86,7 @@ fun NoteListScreen(state: NoteListState) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Your note",
+                    text = stringResource(Res.string.your_note),
                     style = MaterialTheme.typography.headlineMedium
                 )
                 IconButton(
@@ -130,8 +136,8 @@ fun NoteListScreen(state: NoteListState) {
                             state.deleteNote(note)
                             scope.launch {
                                 val result = snackbarHostState.showSnackbar(
-                                    message = "Note deleted",
-                                    actionLabel = "Undo"
+                                    message = getString(Res.string.note_deleted),
+                                    actionLabel = getString(Res.string.undo),
                                 )
                                 if (result == SnackbarResult.ActionPerformed) {
                                     state.restoreNote()

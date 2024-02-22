@@ -26,9 +26,11 @@ import androidx.compose.ui.unit.dp
 import jfyoteau.appnote.core.ui.ColorUtils
 import jfyoteau.noteapp.note.domain.model.Note
 import noteapp.feature.note.generated.resources.Res
+import noteapp.feature.note.generated.resources.delete_note
 import noteapp.feature.note.generated.resources.icon_delete
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
@@ -95,8 +97,8 @@ fun NoteItem(
         ) {
             Icon(
                 painter = painterResource(Res.drawable.icon_delete),
-                contentDescription = "Delete note",
-                tint = MaterialTheme.colorScheme.onSurface
+                contentDescription = stringResource(Res.string.delete_note),
+                tint = MaterialTheme.colorScheme.onSurface,
             )
         }
     }

@@ -46,10 +46,16 @@ import jfyoteau.noteapp.note.presentation.notedetail.state.NoteDetailUiEvent
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import noteapp.feature.note.generated.resources.Res
+import noteapp.feature.note.generated.resources.back
+import noteapp.feature.note.generated.resources.enter_content
+import noteapp.feature.note.generated.resources.enter_title
 import noteapp.feature.note.generated.resources.icon_back
 import noteapp.feature.note.generated.resources.icon_save
+import noteapp.feature.note.generated.resources.note
+import noteapp.feature.note.generated.resources.save_note
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalResourceApi::class)
 @Composable
@@ -90,7 +96,7 @@ fun NoteDetailScreen(state: NoteDetailState) {
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = "Note")
+                    Text(text = stringResource(Res.string.note))
                 },
                 navigationIcon = {
                     IconButton(
@@ -100,7 +106,7 @@ fun NoteDetailScreen(state: NoteDetailState) {
                     ) {
                         Icon(
                             painter = painterResource(Res.drawable.icon_back),
-                            contentDescription = "Back",
+                            contentDescription = stringResource(Res.string.back),
                         )
                     }
                 },
@@ -112,7 +118,7 @@ fun NoteDetailScreen(state: NoteDetailState) {
                     ) {
                         Icon(
                             painter = painterResource(Res.drawable.icon_save),
-                            contentDescription = "Save note",
+                            contentDescription = stringResource(Res.string.save_note),
                         )
                     }
                 },
@@ -174,7 +180,7 @@ fun NoteDetailScreen(state: NoteDetailState) {
 
             TransparentHintTextField(
                 text = titleState.text,
-                hint = "Enter title...",
+                hint = stringResource(Res.string.enter_title),
                 onValueChange = {
                     state.enterTitle(it)
                 },
@@ -190,7 +196,7 @@ fun NoteDetailScreen(state: NoteDetailState) {
 
             TransparentHintTextField(
                 text = contentState.text,
-                hint = "Enter some content",
+                hint = stringResource(Res.string.enter_content),
                 onValueChange = {
                     state.enterContent(it)
                 },

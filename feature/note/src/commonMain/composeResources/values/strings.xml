@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- common -->
+    <string name="back">Back</string>
+
+    <!-- note detail -->
+    <string name="could_not_save_note">Couldn't save note</string>
+    <string name="enter_content">Enter some content</string>
+    <string name="enter_title">Enter title...</string>
+    <string name="note">Note</string>
+    <string name="save_note">Save note</string>
+
+    <!-- note list -->
+    <string name="add_note">Add note</string>
+    <string name="ascending">Ascending</string>
+    <string name="color">Color</string>
+    <string name="date">Date</string>
+    <string name="delete_note">Delete note</string>
+    <string name="descending">Descending</string>
+    <string name="note_deleted">Note deleted</string>
+    <string name="title">Title</string>
+    <string name="undo">Undo</string>
+    <string name="your_note">Your note</string>
+</resources>
