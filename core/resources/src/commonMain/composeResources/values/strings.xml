@@ -21,4 +21,7 @@
     <string name="title">Title</string>
     <string name="undo">Undo</string>
     <string name="your_note">Your note</string>
+
+    <!-- splash -->
+    <string name="loading">Loading...</string>
 </resources>

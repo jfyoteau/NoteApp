@@ -10,7 +10,12 @@ import androidx.compose.ui.Modifier
 import jfyoteau.noteapp.splash.presentation.component.SplashState
 import jfyoteau.noteapp.splash.presentation.component.SplashUiEvent
 import kotlinx.coroutines.flow.collectLatest
+import noteapp.core.resources.generated.resources.Res
+import noteapp.core.resources.generated.resources.loading
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun SplashScreen(
     state: SplashState,
@@ -29,6 +34,6 @@ fun SplashScreen(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
     ) {
-        Text("Loading...")
+        Text(stringResource(Res.string.loading))
     }
 }
