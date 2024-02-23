@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- common -->
+    <string name="back">Retour</string>
+
+    <!-- note detail -->
+    <string name="could_not_save_note">Impossible de sauvegarder le mémo.</string>
+    <string name="enter_content">Entrez un contenu</string>
+    <string name="enter_title">Entrez un titre...</string>
+    <string name="note">Mémo</string>
+    <string name="save_note">Sauvegarder le mémo</string>
+
+    <!-- note list -->
+    <string name="add_note">Ajouter un mémo</string>
+    <string name="ascending">Ascendant</string>
+    <string name="color">Couleur</string>
+    <string name="date">Date</string>
+    <string name="delete_note">Supprimer un mémo</string>
+    <string name="descending">Descendant</string>
+    <string name="note_deleted">Le mémo a été supprimé</string>
+    <string name="title">Titre</string>
+    <string name="undo">Annuler</string>
+    <string name="your_note">Vos mémos</string>
+
+    <!-- splash -->
+    <string name="loading">Chargement...</string>
+</resources>
