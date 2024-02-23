@@ -13,7 +13,6 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.databaseSqldelight)
             implementation(projects.core.ui)
-            implementation(projects.core.resources)
             implementation(libs.kotlinx.datetime)
             implementation(libs.sqldelight.coroutines)
         }
