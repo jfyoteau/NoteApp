@@ -25,9 +25,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import jfyoteau.appnote.core.ui.ColorUtils
 import jfyoteau.noteapp.note.domain.model.Note
-import noteapp.feature.note.generated.resources.Res
-import noteapp.feature.note.generated.resources.delete_note
-import noteapp.feature.note.generated.resources.icon_delete
+import noteapp.core.resources.generated.resources.Res
+import noteapp.core.resources.generated.resources.delete_note
+import noteapp.core.resources.generated.resources.icon_delete
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource

@@ -11,12 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import jfyoteau.noteapp.note.domain.model.NoteOrder
 import jfyoteau.noteapp.note.domain.model.OrderType
-import noteapp.feature.note.generated.resources.Res
-import noteapp.feature.note.generated.resources.ascending
-import noteapp.feature.note.generated.resources.color
-import noteapp.feature.note.generated.resources.date
-import noteapp.feature.note.generated.resources.descending
-import noteapp.feature.note.generated.resources.title
+import noteapp.core.resources.generated.resources.Res
+import noteapp.core.resources.generated.resources.ascending
+import noteapp.core.resources.generated.resources.color
+import noteapp.core.resources.generated.resources.date
+import noteapp.core.resources.generated.resources.descending
+import noteapp.core.resources.generated.resources.title
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 

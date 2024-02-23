@@ -22,7 +22,8 @@ dependencyResolutionManagement {
 
 include(":composeApp")
 include(":core:database-sqldelight")
-include(":core:ui")
 include(":core:presentation")
+include(":core:resources")
+include(":core:ui")
 include(":feature:note")
 include(":feature:splash")
