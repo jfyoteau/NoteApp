@@ -5,7 +5,7 @@ import jfyoteau.appnote.core.presentation.ScreenState
 import jfyoteau.noteapp.note.domain.model.Note
 import jfyoteau.noteapp.note.domain.model.NoteOrder
 
-interface NoteListState : ScreenState<NoteListUiState, Nothing> {
+interface NoteListState : ScreenState<NoteListUiState, NoteListUiEvent> {
     interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,

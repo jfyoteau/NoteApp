@@ -13,7 +13,7 @@ class DefaultNoteListState(
     componentContext: ComponentContext,
     private val navigation: NoteListNavigation,
     private val useCase: NoteListUseCase,
-) : NoteListState, DefaultScreenState<NoteListUiState, Nothing>(componentContext) {
+) : NoteListState, DefaultScreenState<NoteListUiState, NoteListUiEvent>(componentContext) {
     private var getNodesJob: Job? = null
     private var recentlyDeletedNote: Note? = null
 
@@ -51,6 +51,9 @@ class DefaultNoteListState(
     override fun deleteNote(note: Note) = doAction {
         useCase.deleteNote(note = note)
         recentlyDeletedNote = note
+        setUiEvent {
+            NoteListUiEvent.NoteDeleted
+        }
     }
 
     override fun restoreNote() = doAction {

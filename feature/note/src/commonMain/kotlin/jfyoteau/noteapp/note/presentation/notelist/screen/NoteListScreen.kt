@@ -27,15 +27,16 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import jfyoteau.noteapp.note.presentation.notelist.state.NoteListState
-import kotlinx.coroutines.launch
+import jfyoteau.noteapp.note.presentation.notelist.state.NoteListUiEvent
+import kotlinx.coroutines.flow.collectLatest
 import noteapp.core.resources.generated.resources.Res
 import noteapp.core.resources.generated.resources.add_note
 import noteapp.core.resources.generated.resources.icon_add
@@ -52,9 +53,24 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun NoteListScreen(state: NoteListState) {
     val uiState by state.uiState.subscribeAsState()
-    val scope = rememberCoroutineScope()
     @Suppress("SpellCheckingInspection") val snackbarHostState = remember {
         SnackbarHostState()
+    }
+
+    LaunchedEffect(key1 = Unit) {
+        state.uiEvent.collectLatest { event ->
+            when (event) {
+                is NoteListUiEvent.NoteDeleted -> {
+                    val result = snackbarHostState.showSnackbar(
+                        message = getString(Res.string.note_deleted),
+                        actionLabel = getString(Res.string.undo),
+                    )
+                    if (result == SnackbarResult.ActionPerformed) {
+                        state.restoreNote()
+                    }
+                }
+            }
+        }
     }
 
     Scaffold(
@@ -134,15 +150,6 @@ fun NoteListScreen(state: NoteListState) {
                             },
                         onDeleteClick = {
                             state.deleteNote(note)
-                            scope.launch {
-                                val result = snackbarHostState.showSnackbar(
-                                    message = getString(Res.string.note_deleted),
-                                    actionLabel = getString(Res.string.undo),
-                                )
-                                if (result == SnackbarResult.ActionPerformed) {
-                                    state.restoreNote()
-                                }
-                            }
                         }
                     )
                 }
