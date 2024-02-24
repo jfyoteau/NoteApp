@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- common -->
+    <string name="back">戻る</string>
+
+    <!-- note detail -->
+    <string name="could_not_save_note">メモを保存できない</string>
+    <string name="enter_content">内容を入力してください</string>
+    <string name="enter_title">タイトルを入力してください…</string>
+    <string name="note">メモ</string>
+    <string name="save_note">メモを保存する</string>
+
+    <!-- note list -->
+    <string name="add_note">メモを追加する</string>
+    <string name="ascending">昇順</string>
+    <string name="color">色順</string>
+    <string name="date">日付順</string>
+    <string name="delete_note">メモを削除する</string>
+    <string name="descending">降順</string>
+    <string name="note_deleted">メモが削除されました</string>
+    <string name="title">タイトル順</string>
+    <string name="undo">元に戻す</string>
+    <string name="your_note">あなたのメモ</string>
+
+    <!-- splash -->
+    <string name="loading">ローディング…</string>
+</resources>
