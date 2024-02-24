@@ -4,13 +4,13 @@ import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.lifecycle.ApplicationLifecycle
 import jfyoteau.noteapp.presentation.screen.App
-import jfyoteau.noteapp.di.GetRootState
+import jfyoteau.noteapp.di.GetAppState
 
 @OptIn(ExperimentalDecomposeApi::class)
 @Suppress("unused")
 fun MainViewController() = ComposeUIViewController {
-    val rootState = remember {
-        GetRootState(DefaultComponentContext(ApplicationLifecycle()))
+    val appState = remember {
+        GetAppState(DefaultComponentContext(ApplicationLifecycle()))
     }
-    App(state = rootState)
+    App(state = appState)
 }

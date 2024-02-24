@@ -7,7 +7,7 @@ import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetbrains.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
-import jfyoteau.noteapp.di.GetRootState
+import jfyoteau.noteapp.di.GetAppState
 import jfyoteau.noteapp.di.initKoin
 import jfyoteau.noteapp.presentation.screen.App
 
@@ -19,9 +19,9 @@ fun main() {
     val lifecycle = LifecycleRegistry()
 
     // Always create the root component outside Compose on the UI thread.
-    val rootState =
+    val appState =
         runOnUiThread {
-            GetRootState(DefaultComponentContext(lifecycle = lifecycle))
+            GetAppState(DefaultComponentContext(lifecycle = lifecycle))
         }
 
     application {
@@ -34,7 +34,7 @@ fun main() {
             state = windowState,
             title = "NoteApp"
         ) {
-            App(state = rootState)
+            App(state = appState)
         }
     }
 }

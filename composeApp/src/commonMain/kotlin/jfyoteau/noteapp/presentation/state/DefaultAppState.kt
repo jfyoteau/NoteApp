@@ -14,15 +14,15 @@ import jfyoteau.noteapp.note.presentation.notelist.state.NoteListState
 import jfyoteau.noteapp.splash.presentation.component.SplashState
 import kotlinx.serialization.Serializable
 
-class DefaultRootState(
+class DefaultAppState(
     componentContext: ComponentContext,
     private val splashFactory: SplashState.Factory,
     private val noteListFactory: NoteListState.Factory,
     private val noteDetailFactory: NoteDetailState.Factory,
-) : RootState, ComponentContext by componentContext {
+) : AppState, ComponentContext by componentContext {
     private val navigation = StackNavigation<Configuration>()
 
-    override val childStack: Value<ChildStack<*, RootState.Child>> = childStack(
+    override val childStack: Value<ChildStack<*, AppState.Child>> = childStack(
         source = navigation,
         serializer = Configuration.serializer(),
         initialConfiguration = Configuration.Splash,
@@ -33,17 +33,17 @@ class DefaultRootState(
     private fun createChild(
         configuration: Configuration,
         context: ComponentContext,
-    ): RootState.Child {
+    ): AppState.Child {
         return when (configuration) {
-            is Configuration.Splash -> RootState.Child.Splash(
+            is Configuration.Splash -> AppState.Child.Splash(
                 splashComponent(context)
             )
 
-            is Configuration.NoteList -> RootState.Child.NoteList(
+            is Configuration.NoteList -> AppState.Child.NoteList(
                 listComponent(context)
             )
 
-            is Configuration.NoteDetail -> RootState.Child.NoteDetail(
+            is Configuration.NoteDetail -> AppState.Child.NoteDetail(
                 detailComponent(context, configuration.noteId)
             )
         }

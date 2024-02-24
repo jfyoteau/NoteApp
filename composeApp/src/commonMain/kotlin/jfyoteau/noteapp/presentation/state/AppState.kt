@@ -7,7 +7,7 @@ import jfyoteau.noteapp.note.presentation.notedetail.state.NoteDetailState
 import jfyoteau.noteapp.note.presentation.notelist.state.NoteListState
 import jfyoteau.noteapp.splash.presentation.component.SplashState
 
-interface RootState {
+interface AppState {
     sealed interface Child {
         data class Splash(val state: SplashState) : Child
         data class NoteList(val state: NoteListState) : Child
@@ -15,7 +15,7 @@ interface RootState {
     }
 
     interface Factory {
-        operator fun invoke(componentContext: ComponentContext): RootState
+        operator fun invoke(componentContext: ComponentContext): AppState
     }
 
     val childStack: Value<ChildStack<*, Child>>
