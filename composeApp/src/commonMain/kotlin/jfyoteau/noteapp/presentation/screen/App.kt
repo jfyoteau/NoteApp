@@ -1,9 +1,11 @@
 package jfyoteau.noteapp.presentation.screen
 
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
+import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
@@ -18,7 +20,22 @@ fun App(state: AppState) {
         val childStack by state.childStack.subscribeAsState()
         Children(
             stack = childStack,
-            animation = stackAnimation(slide()),
+            animation = stackAnimation { child ->
+                when (val instance = child.instance) {
+                    is AppState.Child.NoteList -> fade()
+
+                    is AppState.Child.NoteDetail ->
+                        slide(
+                            orientation = if (instance.isNew) {
+                                Orientation.Vertical
+                            } else {
+                                Orientation.Horizontal
+                            }
+                        )
+
+                    else -> slide()
+                }
+            },
         ) { child ->
             when (val instance = child.instance) {
                 is AppState.Child.Splash -> SplashScreen(state = instance.state)

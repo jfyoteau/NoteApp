@@ -36,15 +36,16 @@ class DefaultAppState(
     ): AppState.Child {
         return when (configuration) {
             is Configuration.Splash -> AppState.Child.Splash(
-                splashComponent(context)
+                state = splashComponent(context)
             )
 
             is Configuration.NoteList -> AppState.Child.NoteList(
-                listComponent(context)
+                state = listComponent(context)
             )
 
             is Configuration.NoteDetail -> AppState.Child.NoteDetail(
-                detailComponent(context, configuration.noteId)
+                state = detailComponent(context, configuration.noteId),
+                isNew = configuration.noteId == null
             )
         }
     }
