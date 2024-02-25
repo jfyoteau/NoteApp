@@ -105,6 +105,7 @@ class DefaultNoteDetailState(
         useCase.getNote(id = noteId)?.also { note ->
             setUiState {
                 copy(
+                    isNew = false,
                     noteTitle = noteTitle.copy(
                         text = note.title,
                     ),

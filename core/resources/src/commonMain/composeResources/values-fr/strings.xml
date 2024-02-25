@@ -2,6 +2,7 @@
 <resources>
     <!-- common -->
     <string name="back">Retour</string>
+    <string name="close">Fermer</string>
 
     <!-- note detail -->
     <string name="could_not_save_note">Impossible de sauvegarder le mémo.</string>

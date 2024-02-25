@@ -47,9 +47,11 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import noteapp.core.resources.generated.resources.Res
 import noteapp.core.resources.generated.resources.back
+import noteapp.core.resources.generated.resources.close
 import noteapp.core.resources.generated.resources.enter_content
 import noteapp.core.resources.generated.resources.enter_title
 import noteapp.core.resources.generated.resources.icon_back
+import noteapp.core.resources.generated.resources.icon_close
 import noteapp.core.resources.generated.resources.icon_save
 import noteapp.core.resources.generated.resources.note
 import noteapp.core.resources.generated.resources.save_note
@@ -104,10 +106,17 @@ fun NoteDetailScreen(state: NoteDetailState) {
                             state.back()
                         }
                     ) {
-                        Icon(
-                            painter = painterResource(Res.drawable.icon_back),
-                            contentDescription = stringResource(Res.string.back),
-                        )
+                        if (uiState.isNew) {
+                            Icon(
+                                painter = painterResource(Res.drawable.icon_close),
+                                contentDescription = stringResource(Res.string.close),
+                            )
+                        } else {
+                            Icon(
+                                painter = painterResource(Res.drawable.icon_back),
+                                contentDescription = stringResource(Res.string.back),
+                            )
+                        }
                     }
                 },
                 actions = {

@@ -2,6 +2,7 @@
 <resources>
     <!-- common -->
     <string name="back">Back</string>
+    <string name="close">Close</string>
 
     <!-- note detail -->
     <string name="could_not_save_note">Couldn't save note</string>

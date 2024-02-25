@@ -2,6 +2,7 @@
 <resources>
     <!-- common -->
     <string name="back">戻る</string>
+    <string name="close">閉じる</string>
 
     <!-- note detail -->
     <string name="could_not_save_note">メモを保存できない</string>
