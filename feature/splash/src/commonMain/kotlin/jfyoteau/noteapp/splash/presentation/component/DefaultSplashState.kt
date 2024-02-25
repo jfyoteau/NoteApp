@@ -7,7 +7,11 @@ import kotlinx.coroutines.delay
 class DefaultSplashState(
     componentContext: ComponentContext,
     private val navigation: SplashNavigation,
-) : DefaultScreenState<Unit, SplashUiEvent>(componentContext), SplashState {
+) : SplashState,
+    DefaultScreenState<Unit, SplashUiEvent>(
+        componentContext = componentContext,
+        initialUiState = Unit,
+    ) {
     init {
         doAction {
             delay(3000)
@@ -16,8 +20,6 @@ class DefaultSplashState(
             }
         }
     }
-
-    override fun setInitialUiState(): Unit = Unit
 
     override fun gotoNextScreen() = doAction {
         navigation.onCompleted()

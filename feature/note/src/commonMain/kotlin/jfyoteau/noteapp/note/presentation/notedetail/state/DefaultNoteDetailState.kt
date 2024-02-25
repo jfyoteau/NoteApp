@@ -14,15 +14,18 @@ class DefaultNoteDetailState(
     private val noteId: Long?,
     private val navigation: NoteDetailNavigation,
     private val useCase: NoteDetailUseCase,
-) : NoteDetailState, DefaultScreenState<NoteDetailUiState, NoteDetailUiEvent>(componentContext) {
+) : NoteDetailState,
+    DefaultScreenState<NoteDetailUiState, NoteDetailUiEvent>(
+        componentContext = componentContext,
+        initialUiState = NoteDetailUiState(
+            isNew = noteId == null,
+        ),
+    ) {
     init {
         if (noteId != null) {
             getNote(noteId = noteId)
         }
     }
-
-    override fun setInitialUiState(): NoteDetailUiState = NoteDetailUiState()
-
 
     override fun back() = doAction {
         navigation.onBack()
@@ -105,7 +108,6 @@ class DefaultNoteDetailState(
         useCase.getNote(id = noteId)?.also { note ->
             setUiState {
                 copy(
-                    isNew = false,
                     noteTitle = noteTitle.copy(
                         text = note.title,
                     ),

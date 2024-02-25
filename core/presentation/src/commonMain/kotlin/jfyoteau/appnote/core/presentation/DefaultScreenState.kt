@@ -17,14 +17,10 @@ import kotlin.coroutines.CoroutineContext
 
 abstract class DefaultScreenState<UiState : Any, UiEvent>(
     componentContext: ComponentContext,
+    initialUiState: UiState,
 ) : ComponentContext by componentContext, ScreenState<UiState, UiEvent> {
     private val componentScope = coroutineScope()
 
-    protected abstract fun setInitialUiState(): UiState
-
-    private val initialUiState: UiState by lazy {
-        setInitialUiState()
-    }
     private val _uiState = MutableValue(initialUiState)
     override val uiState: Value<UiState> = _uiState
 

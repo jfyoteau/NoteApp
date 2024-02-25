@@ -13,15 +13,17 @@ class DefaultNoteListState(
     componentContext: ComponentContext,
     private val navigation: NoteListNavigation,
     private val useCase: NoteListUseCase,
-) : NoteListState, DefaultScreenState<NoteListUiState, NoteListUiEvent>(componentContext) {
+) : NoteListState,
+    DefaultScreenState<NoteListUiState, NoteListUiEvent>(
+        componentContext = componentContext,
+        initialUiState = NoteListUiState(),
+    ) {
     private var getNodesJob: Job? = null
     private var recentlyDeletedNote: Note? = null
 
     init {
         getNodes(noteOrder = NoteOrder.Date(OrderType.Descending))
     }
-
-    override fun setInitialUiState(): NoteListUiState = NoteListUiState()
 
     override fun getNodes(noteOrder: NoteOrder) {
         getNodesJob?.cancel()
