@@ -1,4 +1,6 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.convention.kotlinMultiplatform.application)
@@ -45,6 +47,19 @@ kotlin {
 android {
     namespace = "jfyoteau.noteapp"
 
+    val keystorePropertiesFile = rootProject.file("android_dev_keystore.properties")
+    val keystoreProperties = Properties()
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+
+    signingConfigs {
+        create("dev") {
+            keyAlias = keystoreProperties["keyAlias"] as String
+            keyPassword = keystoreProperties["keyPassword"] as String
+            storeFile = file(keystoreProperties["storeFile"] as String)
+            storePassword = keystoreProperties["storePassword"] as String
+        }
+    }
+
     defaultConfig {
         applicationId = "jfyoteau.noteapp"
         versionCode = 1
@@ -56,6 +71,11 @@ android {
         }
     }
     buildTypes {
+        getByName("debug") {
+            isDebuggable = true
+            signingConfig = signingConfigs.getByName("dev")
+        }
+
         getByName("release") {
             isMinifyEnabled = false
         }
