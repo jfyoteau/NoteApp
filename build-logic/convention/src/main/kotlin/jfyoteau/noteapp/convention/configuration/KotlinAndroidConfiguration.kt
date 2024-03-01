@@ -11,7 +11,7 @@ import org.gradle.kotlin.dsl.get
  * Configure base Kotlin with Android options
  */
 internal fun Project.configureKotlinAndroid(
-    commonExtension: CommonExtension<*, *, *, *, *>,
+    commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
     val androidManifestFile = file("src/androidMain/AndroidManifest.xml")
     val resFile = file("src/androidMain/res")
