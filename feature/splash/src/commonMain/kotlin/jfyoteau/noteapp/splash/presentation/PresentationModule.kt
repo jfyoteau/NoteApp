@@ -18,6 +18,7 @@ val presentationModule = module {
                     navigation = SplashNavigation(
                         onCompleted = onCompleted,
                     ),
+                    loadingUseCase = get(),
                 )
             }
         }
