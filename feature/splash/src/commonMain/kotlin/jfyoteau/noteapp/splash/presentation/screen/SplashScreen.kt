@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import jfyoteau.noteapp.splash.presentation.component.SplashState
-import jfyoteau.noteapp.splash.presentation.component.SplashUiEvent
+import jfyoteau.noteapp.splash.presentation.state.SplashState
+import jfyoteau.noteapp.splash.presentation.state.SplashUiEvent
 import kotlinx.coroutines.flow.collectLatest
 import noteapp.core.resources.generated.resources.Res
 import noteapp.core.resources.generated.resources.loading

@@ -1,4 +1,4 @@
-package jfyoteau.noteapp.splash.presentation.component
+package jfyoteau.noteapp.splash.presentation.state
 
 import com.arkivanov.decompose.ComponentContext
 import jfyoteau.appnote.core.presentation.DefaultScreenState

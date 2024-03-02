@@ -11,7 +11,7 @@ import com.arkivanov.decompose.router.stack.replaceAll
 import com.arkivanov.decompose.value.Value
 import jfyoteau.noteapp.note.presentation.notedetail.state.NoteDetailState
 import jfyoteau.noteapp.note.presentation.notelist.state.NoteListState
-import jfyoteau.noteapp.splash.presentation.component.SplashState
+import jfyoteau.noteapp.splash.presentation.state.SplashState
 import kotlinx.serialization.Serializable
 
 class DefaultAppState(

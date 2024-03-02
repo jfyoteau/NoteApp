@@ -1,9 +1,9 @@
 package jfyoteau.noteapp.splash.presentation
 
 import com.arkivanov.decompose.ComponentContext
-import jfyoteau.noteapp.splash.presentation.component.DefaultSplashState
-import jfyoteau.noteapp.splash.presentation.component.SplashState
-import jfyoteau.noteapp.splash.presentation.component.SplashNavigation
+import jfyoteau.noteapp.splash.presentation.state.DefaultSplashState
+import jfyoteau.noteapp.splash.presentation.state.SplashState
+import jfyoteau.noteapp.splash.presentation.state.SplashNavigation
 import org.koin.dsl.module
 
 val presentationModule = module {
