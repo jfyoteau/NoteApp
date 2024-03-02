@@ -4,6 +4,7 @@ import com.android.build.api.dsl.ApplicationExtension
 import jfyoteau.noteapp.convention.AndroidBuildConfig
 import jfyoteau.noteapp.convention.configuration.configureKotlinAndroid
 import jfyoteau.noteapp.convention.configuration.configureKotlinMultiplatform
+import jfyoteau.noteapp.convention.extensions.disableCompilationsIfNeeded
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -23,6 +24,9 @@ class KotlinMultiplatformApplicationConventionPlugin : Plugin<Project> {
             // Configure Kotlin Multiplatform
             extensions.configure<KotlinMultiplatformExtension> {
                 configureKotlinMultiplatform(this)
+                targets.configureEach {
+                    disableCompilationsIfNeeded()
+                }
             }
 
             // Configure Android Application
