@@ -11,8 +11,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  linux-build:
-    name: Build on Linux
+  android-build:
+    name: Build Android
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,14 +24,21 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Build
+      - name: Cache KMP tooling
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.konan
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts', '**/*.toml') }}
+
+      - name: Build android application
         uses: gradle/actions/setup-gradle@v3
         with:
-          arguments: build -Dsplit_targets
+          arguments: :composeApp:assembleRelease -Dsplit_targets
 
-  macos-build:
-    name: Build on macos
-    runs-on: macos-14
+  desktop-build:
+    name: Build Desktop
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -42,10 +49,37 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Build
+      - name: Cache KMP tooling
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.konan
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts', '**/*.toml') }}
+
+      - name: Build desktop application
         uses: gradle/actions/setup-gradle@v3
         with:
-          arguments: build -Dsplit_targets
+          arguments: :composeApp:packageDistributionForCurrentOS -Dsplit_targets
+
+  ios-build:
+    name: Build iOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set Up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Cache KMP tooling
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.konan
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts', '**/*.toml') }}
 
       - name: Build iOS application
-        run: xcodebuild -project iosApp/iosApp.xcodeproj -scheme iosApp -sdk iphonesimulator -arch x86_64 build
+        run: xcodebuild -project iosApp/iosApp.xcodeproj -configuration Debug -scheme iosApp -sdk iphoneos -destination name='iPhone 14 Pro' build
