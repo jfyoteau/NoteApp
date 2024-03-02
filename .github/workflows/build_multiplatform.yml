@@ -6,13 +6,9 @@ on:
       - main
   pull_request:
 
-concurrency:
-  group: build-${{ github.head_ref }}
-  cancel-in-progress: true
-
 jobs:
-  android-build:
-    name: Build Android
+  linux-build:
+    name: Build android and desktop
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,39 +25,14 @@ jobs:
         with:
           path: |
             ~/.konan
-          key: ${{ runner.os }}-android-${{ hashFiles('**/*.gradle.kts', '**/*.toml') }}
+          key: ${{ runner.os }}-kmp-${{ hashFiles('**/*.gradle.kts', '**/*.toml') }}
 
-      - name: Build android application
+      - name: Build android and desktop application
         uses: gradle/actions/setup-gradle@v3
         with:
-          arguments: :composeApp:assembleRelease -Dsplit_targets
+          arguments: :composeApp:assembleRelease :composeApp:packageDistributionForCurrentOS -Dsplit_targets
 
-  desktop-build:
-    name: Build Desktop
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set Up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-
-      - name: Cache KMP tooling
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.konan
-          key: ${{ runner.os }}-desktop-${{ hashFiles('**/*.gradle.kts', '**/*.toml') }}
-
-      - name: Build desktop application
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          arguments: :composeApp:packageDistributionForCurrentOS -Dsplit_targets
-
-  ios-build:
+  macos-build:
     name: Build iOS
     runs-on: macos-latest
     steps:
@@ -79,7 +50,7 @@ jobs:
         with:
           path: |
             ~/.konan
-          key: ${{ runner.os }}-ios-${{ hashFiles('**/*.gradle.kts', '**/*.toml') }}
+          key: ${{ runner.os }}-kmp-${{ hashFiles('**/*.gradle.kts', '**/*.toml') }}
 
       - name: Build iOS application
         run: xcodebuild -project iosApp/iosApp.xcodeproj -configuration Debug -scheme iosApp -sdk iphoneos -destination name='iPhone 14 Pro' build
