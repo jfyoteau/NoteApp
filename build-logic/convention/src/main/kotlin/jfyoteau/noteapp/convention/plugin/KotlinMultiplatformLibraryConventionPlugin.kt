@@ -3,6 +3,7 @@ package jfyoteau.noteapp.convention.plugin
 import com.android.build.gradle.LibraryExtension
 import jfyoteau.noteapp.convention.configuration.configureKotlinAndroid
 import jfyoteau.noteapp.convention.configuration.configureKotlinMultiplatform
+import jfyoteau.noteapp.convention.extensions.disableCompilationsIfNeeded
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -22,6 +23,9 @@ class KotlinMultiplatformLibraryConventionPlugin : Plugin<Project> {
             // Configure Kotlin Multiplatform
             extensions.configure<KotlinMultiplatformExtension> {
                 configureKotlinMultiplatform(this)
+                targets.configureEach {
+                    disableCompilationsIfNeeded()
+                }
             }
 
             // Configure Android Library
