@@ -4,13 +4,13 @@ import jfyoteau.noteapp.note.domain.model.Note
 import jfyoteau.noteapp.note.domain.model.NoteOrder
 import jfyoteau.noteapp.note.domain.model.OrderType
 import jfyoteau.noteapp.note.domain.repository.NoteRepository
-import jfyoteau.noteapp.note.domain.usecase.GetNotes
+import jfyoteau.noteapp.note.domain.usecase.GetNotesUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class DefaultGetNotes(
+class DefaultGetNotesUseCase(
     private val repository: NoteRepository,
-) : GetNotes {
+) : GetNotesUseCase {
     override suspend operator fun invoke(noteOrder: NoteOrder): Flow<List<Note>> {
         return repository.getAllNotes().map { notes ->
             when (noteOrder.orderType) {

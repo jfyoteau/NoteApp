@@ -5,7 +5,7 @@ import jfyoteau.noteapp.note.domain.model.NoteOrder
 import jfyoteau.noteapp.note.domain.model.OrderType
 import kotlinx.coroutines.flow.Flow
 
-interface GetNotes {
+interface GetNotesUseCase {
     suspend operator fun invoke(
         noteOrder: NoteOrder = NoteOrder.Date(OrderType.Descending)
     ): Flow<List<Note>>

@@ -83,7 +83,7 @@ class DefaultNoteDetailState(
         val currentMoment = Clock.System.now()
         val now = currentMoment.toLocalDateTime(TimeZone.currentSystemDefault())
         try {
-            useCase.addNote(
+            useCase.addNoteUseCase(
                 note = Note(
                     id = noteId,
                     title = uiState.value.noteTitle.text,
@@ -105,7 +105,7 @@ class DefaultNoteDetailState(
     }
 
     private fun getNote(noteId: Long) = doAction {
-        useCase.getNote(id = noteId)?.also { note ->
+        useCase.getNoteUseCase(id = noteId)?.also { note ->
             setUiState {
                 copy(
                     noteTitle = noteTitle.copy(

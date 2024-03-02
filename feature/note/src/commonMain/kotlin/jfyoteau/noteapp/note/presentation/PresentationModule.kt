@@ -26,9 +26,9 @@ val presentationModule = module {
                         onEditNote = onEditNote,
                     ),
                     useCase = NoteListUseCase(
-                        getNotes = get(),
-                        addNote = get(),
-                        deleteNote = get(),
+                        getNotesUseCase = get(),
+                        addNoteUseCase = get(),
+                        deleteNoteUseCase = get(),
                     ),
                 )
             }
@@ -49,8 +49,8 @@ val presentationModule = module {
                         onBack = onBack,
                     ),
                     useCase = NoteDetailUseCase(
-                        getNote = get(),
-                        addNote = get(),
+                        getNoteUseCase = get(),
+                        addNoteUseCase = get(),
                     )
                 )
             }

@@ -28,7 +28,7 @@ class DefaultNoteListState(
     override fun getNodes(noteOrder: NoteOrder) {
         getNodesJob?.cancel()
         getNodesJob = doCancelableAction {
-            useCase.getNotes(noteOrder = noteOrder)
+            useCase.getNotesUseCase(noteOrder = noteOrder)
                 .onEach { notes ->
                     setUiState {
                         copy(
@@ -51,7 +51,7 @@ class DefaultNoteListState(
     }
 
     override fun deleteNote(note: Note) = doAction {
-        useCase.deleteNote(note = note)
+        useCase.deleteNoteUseCase(note = note)
         recentlyDeletedNote = note
         setUiEvent {
             NoteListUiEvent.NoteDeleted
@@ -59,7 +59,7 @@ class DefaultNoteListState(
     }
 
     override fun restoreNote() = doAction {
-        useCase.addNote(note = recentlyDeletedNote ?: return@doAction)
+        useCase.addNoteUseCase(note = recentlyDeletedNote ?: return@doAction)
         recentlyDeletedNote = null
     }
 

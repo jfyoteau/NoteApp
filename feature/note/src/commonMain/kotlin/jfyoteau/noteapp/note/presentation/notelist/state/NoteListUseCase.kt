@@ -1,11 +1,11 @@
 package jfyoteau.noteapp.note.presentation.notelist.state
 
-import jfyoteau.noteapp.note.domain.usecase.AddNote
-import jfyoteau.noteapp.note.domain.usecase.DeleteNote
-import jfyoteau.noteapp.note.domain.usecase.GetNotes
+import jfyoteau.noteapp.note.domain.usecase.AddNoteUseCase
+import jfyoteau.noteapp.note.domain.usecase.DeleteNoteUseCase
+import jfyoteau.noteapp.note.domain.usecase.GetNotesUseCase
 
 class NoteListUseCase(
-    val getNotes: GetNotes,
-    val addNote: AddNote,
-    val deleteNote: DeleteNote,
+    val getNotesUseCase: GetNotesUseCase,
+    val addNoteUseCase: AddNoteUseCase,
+    val deleteNoteUseCase: DeleteNoteUseCase,
 )

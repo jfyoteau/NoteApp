@@ -2,11 +2,11 @@ package jfyoteau.noteapp.note.domain.usecase.internal
 
 import jfyoteau.noteapp.note.domain.model.Note
 import jfyoteau.noteapp.note.domain.repository.NoteRepository
-import jfyoteau.noteapp.note.domain.usecase.GetNote
+import jfyoteau.noteapp.note.domain.usecase.GetNoteUseCase
 
-class DefaultGetNote(
+class DefaultGetNoteUseCase(
     private val repository: NoteRepository,
-) : GetNote {
+) : GetNoteUseCase {
     override suspend operator fun invoke(id: Long): Note? {
         return repository.getNoteById(id)
     }

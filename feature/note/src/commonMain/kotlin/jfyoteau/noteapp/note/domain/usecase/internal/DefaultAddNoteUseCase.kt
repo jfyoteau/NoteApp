@@ -2,13 +2,13 @@ package jfyoteau.noteapp.note.domain.usecase.internal
 
 import jfyoteau.noteapp.note.domain.model.Note
 import jfyoteau.noteapp.note.domain.repository.NoteRepository
-import jfyoteau.noteapp.note.domain.usecase.AddNote
+import jfyoteau.noteapp.note.domain.usecase.AddNoteUseCase
 import jfyoteau.noteapp.note.domain.usecase.InvalidNoteException
 import kotlin.coroutines.cancellation.CancellationException
 
-class DefaultAddNote(
+class DefaultAddNoteUseCase(
     private val repository: NoteRepository,
-) : AddNote {
+) : AddNoteUseCase {
     @Throws(InvalidNoteException::class, CancellationException::class)
     override suspend fun invoke(note: Note) {
         if (note.title.isBlank()) {
