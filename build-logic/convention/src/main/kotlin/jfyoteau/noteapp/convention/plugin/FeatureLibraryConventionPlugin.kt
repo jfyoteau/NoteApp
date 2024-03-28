@@ -10,7 +10,7 @@ class FeatureLibraryConventionPlugin: Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply("convention.kotlin.multiplatform.library")
+                apply("convention.kmp.library")
                 apply("convention.jetbrains.compose")
                 apply("org.jetbrains.kotlin.plugin.serialization")
             }

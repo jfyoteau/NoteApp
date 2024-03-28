@@ -27,11 +27,11 @@ dependencies {
 gradlePlugin {
     plugins {
         register("kotlinMultiplatformApplicationConventionPlugin") {
-            id = "convention.kotlin.multiplatform.application"
+            id = "convention.kmp.application"
             implementationClass = "jfyoteau.noteapp.convention.plugin.KotlinMultiplatformApplicationConventionPlugin"
         }
         register("kotlinMultiplatformLibraryConventionPlugin") {
-            id = "convention.kotlin.multiplatform.library"
+            id = "convention.kmp.library"
             implementationClass = "jfyoteau.noteapp.convention.plugin.KotlinMultiplatformLibraryConventionPlugin"
         }
         register("JetbrainsComposeConventionPlugin") {

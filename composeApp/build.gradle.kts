@@ -3,7 +3,7 @@ import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
-    alias(libs.plugins.convention.kotlinMultiplatform.application)
+    alias(libs.plugins.convention.kmp.application)
     alias(libs.plugins.convention.jetbrainsCompose)
     alias(libs.plugins.kotlinSerialization)
 }
