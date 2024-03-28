@@ -11,7 +11,7 @@ class FeatureLibraryConventionPlugin: Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("convention.kotlin.multiplatform.library")
-                apply("convention.jetbrains.compose.library")
+                apply("convention.jetbrains.compose")
                 apply("org.jetbrains.kotlin.plugin.serialization")
             }
 

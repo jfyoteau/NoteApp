@@ -34,13 +34,9 @@ gradlePlugin {
             id = "convention.kotlin.multiplatform.library"
             implementationClass = "jfyoteau.noteapp.convention.plugin.KotlinMultiplatformLibraryConventionPlugin"
         }
-        register("JetbrainsComposeApplicationConventionPlugin") {
-            id = "convention.jetbrains.compose.application"
-            implementationClass = "jfyoteau.noteapp.convention.plugin.JetbrainsComposeApplicationConventionPlugins"
-        }
-        register("JetbrainsComposeLibraryConventionPlugin") {
-            id = "convention.jetbrains.compose.library"
-            implementationClass = "jfyoteau.noteapp.convention.plugin.JetbrainsComposeLibraryConventionPlugins"
+        register("JetbrainsComposeConventionPlugin") {
+            id = "convention.jetbrains.compose"
+            implementationClass = "jfyoteau.noteapp.convention.plugin.JetbrainsComposeConventionPlugins"
         }
         register("FeatureLibraryConventionPlugin") {
             id = "convention.feature"

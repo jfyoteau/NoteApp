@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.convention.kotlinMultiplatform.library)
-    alias(libs.plugins.convention.jetbrainsCompose.library)
+    alias(libs.plugins.convention.jetbrainsCompose)
 }
 
 android {

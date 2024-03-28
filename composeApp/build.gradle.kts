@@ -4,7 +4,7 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.convention.kotlinMultiplatform.application)
-    alias(libs.plugins.convention.jetbrainsCompose.application)
+    alias(libs.plugins.convention.jetbrainsCompose)
     alias(libs.plugins.kotlinSerialization)
 }
 
