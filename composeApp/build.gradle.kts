@@ -5,7 +5,7 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.convention.kmp.application)
     alias(libs.plugins.convention.jetbrainsCompose)
-    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -31,6 +31,7 @@ kotlin {
             implementation(libs.decompose)
         }
         commonMain.dependencies {
+            implementation(projects.core.presentation)
             implementation(projects.feature.splash)
             implementation(projects.feature.note)
             implementation(libs.koin.core)

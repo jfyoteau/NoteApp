@@ -17,10 +17,8 @@ internal fun configureKotlinMultiplatform(
 
         // Android
         androidTarget {
-            compilations.all {
-                kotlinOptions {
-                    jvmTarget = AndroidBuildConfig.jvmTarget.toString()
-                }
+            compilerOptions {
+                jvmTarget.set(AndroidBuildConfig.jvmTarget)
             }
         }
 

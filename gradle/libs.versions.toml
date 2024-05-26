@@ -1,19 +1,17 @@
 [versions]
-agp = "8.3.1"
+agp = "8.4.1"
 android-desugarJdkLibs = "2.0.4"
-androidx-activityCompose = "1.8.2"
-androidx-compose-bom = "2024.03.00"
-androidx-compose-compiler = "1.5.11"
-decompose = "2.2.2-compose-experimental"
+androidx-activityCompose = "1.9.0"
+androidx-compose-bom = "2024.05.00"
+decompose = "3.0.0"
 gradleVersions-plugin = "0.51.0"
-jetbrains-compose-compiler = "1.5.10.1"
-jetbrains-compose-plugin = "1.6.1"
+jetbrains-compose-plugin = "1.6.10"
 koin = "3.5.3"
-kotlin = "1.9.23"
-kotlinx-coroutines = "1.8.0"
-kotlinx-datetime = "0.5.0"
+kotlin = "2.0.0"
+kotlinx-coroutines = "1.8.1"
+kotlinx-datetime = "0.6.0"
 kotlinx-serialization = "1.6.3"
-sqldelight = "2.0.1"
+sqldelight = "2.0.2"
 
 [libraries]
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "android-desugarJdkLibs" }
@@ -22,7 +20,7 @@ androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", versi
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
-decompose-extensions-compose = { group = "com.arkivanov.decompose", name = "extensions-compose-jetbrains", version.ref = "decompose" }
+decompose-extensions-compose = { group = "com.arkivanov.decompose", name = "extensions-compose", version.ref = "decompose" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
@@ -42,12 +40,13 @@ jetbrains-compose-gradlePlugin = { group = "org.jetbrains.compose", name = "comp
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]
-androidApplication = { id = "com.android.application", version.ref = "agp" }
-androidLibrary = { id = "com.android.library", version.ref = "agp" }
-gradleVersions = { id = "com.github.ben-manes.versions", version.ref = "gradleVersions-plugin" }
-jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "jetbrains-compose-plugin" }
-kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+gradle-versions = { id = "com.github.ben-manes.versions", version.ref = "gradleVersions-plugin" }
+jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "jetbrains-compose-plugin" }
+kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 
 # Plugins defined by this project

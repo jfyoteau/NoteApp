@@ -39,7 +39,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
+import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import jfyoteau.noteapp.note.domain.model.Note
 import jfyoteau.noteapp.note.presentation.notedetail.state.NoteDetailState
 import jfyoteau.noteapp.note.presentation.notedetail.state.NoteDetailUiEvent
@@ -55,11 +55,10 @@ import noteapp.core.resources.generated.resources.icon_close
 import noteapp.core.resources.generated.resources.icon_save
 import noteapp.core.resources.generated.resources.note
 import noteapp.core.resources.generated.resources.save_note
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalResourceApi::class)
+@OptIn(ExperimentalMaterial3Api::class,)
 @Composable
 fun NoteDetailScreen(state: NoteDetailState) {
     val uiState by state.uiState.subscribeAsState()
