@@ -35,6 +35,7 @@ kotlin {
             implementation(projects.feature.splash)
             implementation(projects.feature.note)
             implementation(libs.koin.core)
+            implementation(libs.koin.compose)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.decompose)
             implementation(libs.decompose.extensions.compose)
@@ -42,6 +43,8 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
+            implementation(libs.slf4j.api)
+            implementation(libs.slf4j.reload4j)
         }
     }
 }
@@ -88,10 +91,17 @@ compose.desktop {
     application {
         mainClass = "jfyoteau.noteapp.MainKt"
 
+        buildTypes.release {
+            proguard {
+                configurationFiles.from("compose-desktop.pro")
+            }
+        }
+
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "jfyoteau.noteapp"
             packageVersion = "1.0.0"
+            includeAllModules = true
         }
     }
 }
