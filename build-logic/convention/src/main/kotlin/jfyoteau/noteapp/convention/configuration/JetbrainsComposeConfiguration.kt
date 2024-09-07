@@ -10,9 +10,6 @@ internal fun Project.configureJetbrainsCompose(
     kotlinMultiplatformExtension: KotlinMultiplatformExtension
 ) {
     val composeExtension = extensions.getByType<ComposeExtension>()
-    composeExtension.apply {
-        kotlinCompilerPlugin.set(libs.findVersion("jetbrains.compose.compiler").get().toString())
-    }
     val compose = composeExtension.dependencies
 
     kotlinMultiplatformExtension.apply {

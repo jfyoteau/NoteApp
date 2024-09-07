@@ -17,7 +17,7 @@ internal fun Project.configureKotlinAndroid(
     val resFile = file("src/androidMain/res")
 
     commonExtension.apply {
-        compileSdk = AndroidBuildConfig.compileSdkVersion
+        compileSdk = AndroidBuildConfig.COMPILE_SDK_VERSION
 
         if (androidManifestFile.exists()) {
             sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -27,14 +27,14 @@ internal fun Project.configureKotlinAndroid(
         }
 
         defaultConfig {
-            minSdk = AndroidBuildConfig.minSdkVersion
+            minSdk = AndroidBuildConfig.MIN_SDK_VERSION
         }
 
         compileOptions {
             // Up to Java 11 APIs are available through desugaring
             // https://developer.android.com/studio/write/java11-minimal-support-table
-            sourceCompatibility = AndroidBuildConfig.jvmTarget
-            targetCompatibility = AndroidBuildConfig.jvmTarget
+            sourceCompatibility = AndroidBuildConfig.javaVersion
+            targetCompatibility = AndroidBuildConfig.javaVersion
             isCoreLibraryDesugaringEnabled = true
         }
         buildTypes {

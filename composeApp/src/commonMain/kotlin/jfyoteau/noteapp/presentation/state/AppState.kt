@@ -10,7 +10,9 @@ import jfyoteau.noteapp.splash.presentation.state.SplashState
 interface AppState {
     sealed interface Child {
         data class Splash(val state: SplashState) : Child
+
         data class NoteList(val state: NoteListState) : Child
+
         data class NoteDetail(val state: NoteDetailState, val isNew: Boolean) : Child
     }
 

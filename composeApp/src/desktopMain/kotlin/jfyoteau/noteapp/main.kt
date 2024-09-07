@@ -4,14 +4,12 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import com.arkivanov.decompose.DefaultComponentContext
-import com.arkivanov.decompose.ExperimentalDecomposeApi
-import com.arkivanov.decompose.extensions.compose.jetbrains.lifecycle.LifecycleController
+import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import jfyoteau.noteapp.di.GetAppState
 import jfyoteau.noteapp.di.initKoin
 import jfyoteau.noteapp.presentation.screen.App
 
-@OptIn(ExperimentalDecomposeApi::class)
 fun main() {
     // Initialize Koin
     initKoin()

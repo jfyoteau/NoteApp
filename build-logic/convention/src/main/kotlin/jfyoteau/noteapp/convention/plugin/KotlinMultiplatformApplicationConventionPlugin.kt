@@ -32,7 +32,7 @@ class KotlinMultiplatformApplicationConventionPlugin : Plugin<Project> {
             // Configure Android Application
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid(this)
-                defaultConfig.targetSdk = AndroidBuildConfig.targetSdkVersion
+                defaultConfig.targetSdk = AndroidBuildConfig.TARGET_SDK_VERSION
             }
 
             // Because task 'testClasses' does not exist, create it

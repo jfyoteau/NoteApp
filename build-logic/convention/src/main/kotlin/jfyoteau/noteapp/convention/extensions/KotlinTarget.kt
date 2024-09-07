@@ -4,7 +4,7 @@ import jfyoteau.noteapp.convention.EnvParams
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinMultiplatformPlugin
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinMetadataTarget
 
 private enum class HostType {
     MAC_OS,
@@ -12,25 +12,25 @@ private enum class HostType {
 }
 
 private fun KotlinTarget.getHostType(): HostType? =
-    when (platformType) {
-        KotlinPlatformType.androidJvm,
-        KotlinPlatformType.jvm,
-        KotlinPlatformType.js,
-        KotlinPlatformType.wasm -> HostType.LINUX
+        when (platformType) {
+            KotlinPlatformType.androidJvm,
+            KotlinPlatformType.jvm,
+            KotlinPlatformType.js,
+            KotlinPlatformType.wasm -> HostType.LINUX
 
-        KotlinPlatformType.native ->
-            when {
-                name.startsWith("ios") -> HostType.MAC_OS
-                name.startsWith("watchos") -> HostType.MAC_OS
-                name.startsWith("linux") -> HostType.LINUX
-                else -> error("Unsupported native target: $this")
-            }
+            KotlinPlatformType.native ->
+                when {
+                    name.startsWith("ios") -> HostType.MAC_OS
+                    name.startsWith("watchos") -> HostType.MAC_OS
+                    name.startsWith("linux") -> HostType.LINUX
+                    else -> error("Unsupported native target: $this")
+                }
 
-        KotlinPlatformType.common -> null
-    }
+            KotlinPlatformType.common -> null
+        }
 
 private fun KotlinTarget.isCompilationAllowed(): Boolean {
-    if ((name == KotlinMultiplatformPlugin.METADATA_TARGET_NAME) || !EnvParams.splitTargets) {
+    if ((name == KotlinMetadataTarget.METADATA_TARGET_NAME) || !EnvParams.splitTargets) {
         return true
     }
 

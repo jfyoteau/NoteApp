@@ -33,7 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
+import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import jfyoteau.noteapp.note.presentation.notelist.state.NoteListState
 import jfyoteau.noteapp.note.presentation.notelist.state.NoteListUiEvent
 import kotlinx.coroutines.flow.collectLatest
@@ -44,12 +44,10 @@ import noteapp.core.resources.generated.resources.icon_sort
 import noteapp.core.resources.generated.resources.note_deleted
 import noteapp.core.resources.generated.resources.undo
 import noteapp.core.resources.generated.resources.your_note
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun NoteListScreen(state: NoteListState) {
     val uiState by state.uiState.subscribeAsState()

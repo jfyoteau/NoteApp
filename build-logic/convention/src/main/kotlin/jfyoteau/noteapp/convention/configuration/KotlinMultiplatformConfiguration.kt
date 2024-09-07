@@ -1,6 +1,7 @@
 package jfyoteau.noteapp.convention.configuration
 
 import jfyoteau.noteapp.convention.AndroidBuildConfig
+import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
@@ -9,6 +10,10 @@ internal fun configureKotlinMultiplatform(
     kotlinMultiplatformExtension: KotlinMultiplatformExtension
 ) {
     kotlinMultiplatformExtension.apply {
+        jvmToolchain {
+            languageVersion.set(JavaLanguageVersion.of(AndroidBuildConfig.javaVersion.majorVersion))
+        }
+
         // https://kotlinlang.org/docs/multiplatform-expect-actual.html#expected-and-actual-classes
         // To suppress this warning about usage of expected and actual classes
         compilerOptions {
@@ -17,10 +22,8 @@ internal fun configureKotlinMultiplatform(
 
         // Android
         androidTarget {
-            compilations.all {
-                kotlinOptions {
-                    jvmTarget = AndroidBuildConfig.jvmTarget.toString()
-                }
+            compilerOptions {
+                jvmTarget.set(AndroidBuildConfig.jvmTarget)
             }
         }
 
